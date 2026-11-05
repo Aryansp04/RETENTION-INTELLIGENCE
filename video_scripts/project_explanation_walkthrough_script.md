@@ -111,3 +111,4 @@
 - Review the video for clear pacing and confident voice delivery.
 - Ensure the recorded video resolution is at least 1080p.
 - Upload to YouTube (Unlisted or Public) or Google Drive (with public view permissions) and copy the link for the internship submission.
+

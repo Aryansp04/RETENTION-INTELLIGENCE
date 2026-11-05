@@ -287,3 +287,4 @@ By restructuring retention frameworks around the **Relationship Strength Index (
 3. Verbeke, W., Martens, D., Mues, C., & Baesens, B. (2012). Building comprehensible customer churn prediction models with advanced rule induction techniques. *Expert Systems with Applications*, 39(3), 2354-2364.
 4. Blattberg, R. C., Kim, B. D., & Neslin, S. A. (2008). *Database Marketing: Analyzing and Managing Customers*. Springer Science & Business Media.
 5. Unified Mentor Data Science & Financial Analytics Fellowship. (2026). *Customer Engagement & Product Utilization Analytics Project Guidelines*.
+

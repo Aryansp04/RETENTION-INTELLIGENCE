@@ -158,3 +158,4 @@ def compute_segment_exposure(df: pd.DataFrame) -> pd.DataFrame:
     summary['CapitalAtRisk'] = summary['TotalBalance'] * summary['ChurnRate']
 
     return summary
+

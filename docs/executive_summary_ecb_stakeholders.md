@@ -80,3 +80,4 @@ Unlike institutional corporate deposits that provide formal notice of withdrawal
 Financial solvency cannot be inferred from static balances. In an era of instant SEPA credit transfers, mobile account switching, and aggressive digital competition, **transactional engagement is the only durable moat**. 
 
 By aligning regulatory supervision and internal bank operations with behavioral engagement metrics, European banking institutions can protect retail deposit stability, eliminate toxic cross-selling practices, and reinforce systemic resilience across the Eurozone financial system.
+

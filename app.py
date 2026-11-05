@@ -1,8 +1,8 @@
 """
 Customer Engagement & Product Utilization Analytics for Retention Strategy
-Executive Retention Intelligence Platform
-Inspired by the Design, Technology & Visual Language of Maryl Gonzalez (marylgonzalez.com)
-Palette: Deep Velvet Plum Noir (#171323), Ethereal Lavender (#D7C6FF), Sage Mint (#B3E6DB), Electric Violet (#6658FF) & Coral Rose (#FB7185)
+Full Experience Inspired by Maryl Gonzalez (marylgonzalez.com)
+Complete Scroll-Triggered Story, 3D Perspective Artifacts, Kinetic Line Masks, 
+Manifesto Sparkles, Interactive Case Showcase, 3D Spatial Hologram & Contact Experience
 Author: Aryan (Internship Portfolio Project)
 """
 
@@ -24,213 +24,427 @@ from src.simulator import simulate_retention_interventions
 # Page Configuration
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="Retention Intelligence · Design, Data & Strategy",
+    page_title="Retention Intelligence · Design, Technology & a Little Magic",
     page_icon="✦",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # ---------------------------------------------------------
-# Maryl Gonzalez Inspired CSS Styling (Velvet Noir, Lavender & Sparkles)
+# Full Maryl Gonzalez Aesthetic & Kinetic Scroll CSS
 # ---------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
     
-    /* Core Velvet Canvas */
+    /* Core Velvet Plum Canvas */
     html, body, [class*="css"] {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         color: #F8F6F2;
+        scroll-behavior: smooth;
     }
     
     .stApp {
         background-color: #171323;
         background-image: 
-            radial-gradient(at 0% 0%, rgba(102, 88, 255, 0.12) 0px, transparent 50%),
-            radial-gradient(at 100% 0%, rgba(215, 198, 255, 0.08) 0px, transparent 50%),
-            radial-gradient(at 50% 100%, rgba(179, 230, 219, 0.08) 0px, transparent 50%);
+            radial-gradient(circle at 10% 10%, rgba(102, 88, 255, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 90% 20%, rgba(215, 198, 255, 0.12) 0%, transparent 45%),
+            radial-gradient(circle at 50% 90%, rgba(179, 230, 219, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(244, 63, 94, 0.08) 0%, transparent 40%);
+        background-attachment: fixed;
     }
 
-    /* Maryl-Inspired Editorial Hero Header */
-    .magic-hero {
+    /* Fixed Minimalist Navigation Bar */
+    .maryl-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 36px;
+        background: rgba(23, 19, 35, 0.85);
+        border: 1px solid rgba(215, 198, 255, 0.12);
+        border-radius: 9999px;
+        backdrop-filter: blur(20px);
+        margin-bottom: 30px;
+        position: sticky;
+        top: 15px;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(10, 6, 18, 0.5);
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .nav-sparkle {
+        color: #F5D061;
+        font-size: 16px;
+        animation: spinSparkle 8s linear infinite;
+        display: inline-block;
+    }
+
+    @keyframes spinSparkle {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .nav-link {
+        color: #C9C2E0;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+        color: #D7C6FF;
+    }
+
+    .nav-contact-btn {
+        background: rgba(215, 198, 255, 0.12);
+        border: 1px solid rgba(215, 198, 255, 0.35);
+        color: #FFFFFF !important;
+        padding: 8px 18px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+    .nav-contact-btn:hover {
+        background: #6658FF;
+        border-color: #6658FF;
+        box-shadow: 0 0 20px rgba(102, 88, 255, 0.5);
+    }
+
+    /* Hero Section with Kinetic Line Masks */
+    .hero-container {
+        padding: 60px 20px 40px 20px;
+        text-align: center;
         position: relative;
-        background: linear-gradient(145deg, rgba(35, 23, 51, 0.75) 0%, rgba(23, 19, 35, 0.85) 100%);
-        border: 1px solid rgba(215, 198, 255, 0.16);
-        border-radius: 24px;
-        padding: 38px 44px;
-        margin-bottom: 26px;
-        box-shadow: 
-            0 24px 60px -15px rgba(10, 6, 18, 0.8),
-            inset 0 1px 0 rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(24px);
-        overflow: hidden;
     }
 
-    .magic-eyebrow {
+    .hero-eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #D7C6FF;
+        margin-bottom: 20px;
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        background: rgba(215, 198, 255, 0.08);
+        padding: 6px 16px;
+        border-radius: 9999px;
+        border: 1px solid rgba(215, 198, 255, 0.2);
+    }
+
+    .hero-title-giant {
+        font-size: clamp(40px, 7vw, 76px);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        color: #FFFFFF;
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+
+    .hero-title-giant em {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        background: linear-gradient(135deg, #D7C6FF 0%, #EAC5ED 40%, #B3E6DB 80%, #FFFFFF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+
+    .hero-sub-p {
+        font-size: 18px;
+        color: #C9C2E0;
+        max-width: 720px;
+        margin: 24px auto 36px auto;
+        line-height: 1.6;
+        font-weight: 400;
+    }
+
+    /* 3D Perspective Banking Artifact */
+    .artifact-3d-wrapper {
+        perspective: 1200px;
+        margin: 40px auto;
+        max-width: 680px;
+    }
+
+    .artifact-3d-card {
+        background: linear-gradient(135deg, rgba(35, 23, 51, 0.85) 0%, rgba(20, 16, 30, 0.95) 100%);
+        border: 1px solid rgba(215, 198, 255, 0.25);
+        border-radius: 28px;
+        padding: 36px 40px;
+        box-shadow: 
+            0 30px 80px -15px rgba(10, 6, 18, 0.9),
+            0 0 50px -10px rgba(102, 88, 255, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transform: rotateX(8deg) rotateY(-4deg);
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+    }
+    .artifact-3d-card:hover {
+        transform: rotateX(0deg) rotateY(0deg) translateY(-8px);
+        box-shadow: 
+            0 40px 100px -10px rgba(10, 6, 18, 1),
+            0 0 70px rgba(215, 198, 255, 0.35);
+    }
+
+    .artifact-glow-ring {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(102, 88, 255, 0.4) 0%, rgba(23, 19, 35, 0) 70%);
+        border: 1px solid rgba(215, 198, 255, 0.4);
+        font-size: 36px;
+        margin-bottom: 16px;
+        box-shadow: 0 0 30px rgba(102, 88, 255, 0.4);
+    }
+
+    /* Maryl's Story Chapters (HeroStory Module) */
+    .chapter-section {
+        padding: 50px 0;
+        border-top: 1px solid rgba(215, 198, 255, 0.1);
+    }
+
+    .chapter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .chapter-eyebrow {
         font-family: 'JetBrains Mono', monospace;
         font-size: 11px;
-        font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #D7C6FF;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
     }
 
-    .magic-sparkle {
-        display: inline-block;
-        color: #F5D061;
-        font-size: 14px;
-        filter: drop-shadow(0 0 8px rgba(245, 208, 97, 0.6));
-    }
-
-    .magic-title {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 36px;
+    .chapter-title {
+        font-size: 38px;
         font-weight: 800;
-        letter-spacing: -0.03em;
         line-height: 1.15;
+        letter-spacing: -0.03em;
         color: #FFFFFF;
         margin: 0;
     }
 
-    .magic-title em {
-        font-family: 'Playfair Display', Georgia, serif;
+    .chapter-title em {
+        font-family: 'Playfair Display', serif;
         font-style: italic;
         font-weight: 400;
-        background: linear-gradient(135deg, #D7C6FF 0%, #EAC5ED 50%, #B3E6DB 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #D7C6FF;
     }
 
-    .magic-tagline {
+    .chapter-text {
+        font-size: 16px;
         color: #C9C2E0;
-        font-size: 15px;
-        line-height: 1.6;
-        margin-top: 10px;
-        max-width: 900px;
-        font-weight: 400;
+        line-height: 1.7;
+        margin-top: 14px;
     }
 
-    .magic-metrics-strip {
-        display: flex;
-        gap: 28px;
-        margin-top: 22px;
-        padding-top: 18px;
-        border-top: 1px solid rgba(215, 198, 255, 0.12);
-        flex-wrap: wrap;
-    }
-
-    .magic-strip-item {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12px;
-        color: #9D96B8;
-    }
-    
-    .magic-strip-item strong {
-        color: #B3E6DB;
-        font-weight: 600;
-    }
-
-    /* Velvet Glass KPI Cards */
-    .magic-card {
-        background: linear-gradient(145deg, rgba(35, 23, 51, 0.65) 0%, rgba(23, 19, 35, 0.8) 100%);
-        border: 1px solid rgba(215, 198, 255, 0.14);
-        border-radius: 18px;
-        padding: 24px 26px;
-        box-shadow: 
-            0 16px 36px -10px rgba(10, 6, 18, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(18px);
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Manifesto Section with Spinning Sparkle Star */
+    .manifesto-box {
+        text-align: center;
+        padding: 80px 20px;
         position: relative;
     }
 
-    .magic-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(215, 198, 255, 0.35);
-        box-shadow: 
-            0 24px 48px -12px rgba(10, 6, 18, 0.8),
-            0 0 25px rgba(102, 88, 255, 0.15);
+    .manifesto-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
+        max-width: 900px;
+        margin: 0 auto;
     }
 
-    .magic-card-eyebrow {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
+    .manifesto-title span {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #D7C6FF;
+    }
+
+    .manifesto-star-svg {
+        display: inline-block;
+        width: 38px;
+        height: 38px;
+        vertical-align: middle;
+        color: #F5D061;
+        margin: 0 10px;
+        filter: drop-shadow(0 0 12px rgba(245, 208, 97, 0.7));
+        animation: spinSparkle 12s linear infinite;
+    }
+
+    .manifesto-note {
+        font-size: 16px;
         color: #A59DBF;
-        margin-bottom: 8px;
-        font-weight: 600;
+        margin-top: 18px;
+        font-style: italic;
     }
 
-    .magic-card-val {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: 34px;
+    /* Wavy Ribbon SVG Fallback */
+    .ribbon-svg {
+        width: 100%;
+        max-width: 800px;
+        height: 70px;
+        margin: 20px auto;
+        display: block;
+        color: rgba(215, 198, 255, 0.25);
+    }
+
+    /* 3D Case Study / Showcase Cards */
+    .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 30px;
+    }
+
+    .showcase-card {
+        background: linear-gradient(145deg, rgba(35, 23, 51, 0.7) 0%, rgba(20, 16, 30, 0.85) 100%);
+        border: 1px solid rgba(215, 198, 255, 0.16);
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 16px 36px rgba(10, 6, 18, 0.6);
+        backdrop-filter: blur(16px);
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+    }
+    .showcase-card:hover {
+        transform: translateY(-5px) scale(1.01);
+        border-color: rgba(215, 198, 255, 0.4);
+        box-shadow: 0 24px 50px rgba(102, 88, 255, 0.25);
+    }
+
+    .showcase-card-num {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: #D7C6FF;
+        margin-bottom: 8px;
+    }
+
+    .showcase-card-h {
+        font-size: 22px;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin: 0 0 8px 0;
+    }
+
+    .showcase-card-p {
+        font-size: 13px;
+        color: #C9C2E0;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Contact Section (Exact Maryl Replica) */
+    .contact-section {
+        background: linear-gradient(145deg, rgba(35, 23, 51, 0.85) 0%, rgba(18, 14, 28, 0.95) 100%);
+        border: 1px solid rgba(215, 198, 255, 0.22);
+        border-radius: 28px;
+        padding: 48px 56px;
+        margin-top: 60px;
+        box-shadow: 0 30px 80px rgba(10, 6, 18, 0.8);
+        position: relative;
+    }
+
+    .contact-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(215, 198, 255, 0.12);
+        padding-bottom: 20px;
+        margin-bottom: 28px;
+    }
+
+    .contact-eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: #D7C6FF;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .contact-spark-text {
+        font-size: 12px;
+        color: #A59DBF;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .contact-title-big {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(36px, 5.5vw, 64px);
+        color: #FFFFFF;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        line-height: 1.1;
+        transition: color 0.2s ease;
+        margin: 10px 0 30px 0;
+    }
+    .contact-title-big em {
+        font-style: italic;
+        color: #D7C6FF;
+    }
+    .contact-title-big:hover em {
+        color: #B3E6DB;
+    }
+
+    .contact-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid rgba(215, 198, 255, 0.12);
+        padding-top: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .contact-email-link {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 16px;
         font-weight: 600;
         color: #FFFFFF;
-        letter-spacing: -0.5px;
-        margin-bottom: 8px;
+        text-decoration: none;
+        border-bottom: 1px solid #D7C6FF;
+        padding-bottom: 2px;
     }
 
-    /* Maryl-Inspired Badges */
-    .pill-lavender {
-        display: inline-block;
-        background: rgba(215, 198, 255, 0.12);
-        border: 1px solid rgba(215, 198, 255, 0.3);
-        color: #D7C6FF;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-family: 'JetBrains Mono', monospace;
-    }
-
-    .pill-mint {
-        display: inline-block;
-        background: rgba(179, 230, 219, 0.12);
-        border: 1px solid rgba(179, 230, 219, 0.3);
-        color: #B3E6DB;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-family: 'JetBrains Mono', monospace;
-    }
-
-    .pill-rose {
-        display: inline-block;
-        background: rgba(251, 113, 133, 0.12);
-        border: 1px solid rgba(251, 113, 133, 0.35);
-        color: #FB7185;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-family: 'JetBrains Mono', monospace;
-    }
-
-    .pill-gold {
-        display: inline-block;
-        background: rgba(245, 208, 97, 0.12);
-        border: 1px solid rgba(245, 208, 97, 0.35);
-        color: #F5D061;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Maryl-Style Tabs */
+    /* Streamlit Tab Segmented Bar */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
-        background: rgba(23, 19, 35, 0.75);
+        background: rgba(23, 19, 35, 0.85);
         padding: 6px;
         border-radius: 16px;
-        border: 1px solid rgba(215, 198, 255, 0.12);
+        border: 1px solid rgba(215, 198, 255, 0.14);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
     
@@ -245,51 +459,28 @@ st.markdown("""
     }
     
     .stTabs [aria-selected="true"] {
-        background: rgba(102, 88, 255, 0.25) !important;
+        background: rgba(102, 88, 255, 0.3) !important;
         color: #FFFFFF !important;
         font-weight: 700 !important;
-        border: 1px solid rgba(215, 198, 255, 0.35) !important;
-        box-shadow: 0 4px 15px rgba(102, 88, 255, 0.2) !important;
+        border: 1px solid rgba(215, 198, 255, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(102, 88, 255, 0.25) !important;
     }
 
-    /* Velvet Sidebar */
+    /* Sidebar Dark Velvet */
     section[data-testid="stSidebar"] {
         background-color: #120E1C;
         border-right: 1px solid rgba(215, 198, 255, 0.08);
-    }
-
-    /* Maryl-Inspired Contact Card */
-    .magic-contact-box {
-        background: linear-gradient(135deg, rgba(35, 23, 51, 0.8) 0%, rgba(20, 16, 30, 0.9) 100%);
-        border: 1px solid rgba(215, 198, 255, 0.2);
-        border-radius: 20px;
-        padding: 34px 40px;
-        margin-top: 36px;
-        box-shadow: 0 20px 50px rgba(10, 6, 18, 0.6);
-        position: relative;
-    }
-    
-    .magic-contact-heading {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: 32px;
-        color: #FFFFFF;
-        margin: 6px 0 12px 0;
-        line-height: 1.2;
-    }
-
-    .magic-contact-heading em {
-        font-style: italic;
-        color: #D7C6FF;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Velvet & Lavender Plotly Chart Helper
+# Plotly Chart Styling Helper (Velvet Night, Mint & Lavender)
 # ---------------------------------------------------------
 def style_magic_chart(fig, height=390, title=None):
     """
-    Styles Plotly charts with Maryl Gonzalez's velvet night, lavender and mint aesthetic.
+    Styles Plotly charts with Maryl Gonzalez's velvet night, lavender, and mint aesthetic
+    without any duplicate keyword argument collisions on axes.
     """
     fig.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
@@ -325,44 +516,222 @@ def get_clean_data():
 raw_df = get_clean_data()
 
 # ---------------------------------------------------------
-# Sidebar Controls
+# Minimalist Floating Header / Navigation (Replicating Maryl's Header)
 # ---------------------------------------------------------
-with st.sidebar:
-    st.markdown("""
-    <div style="padding: 12px 0 16px 0; border-bottom: 1px solid rgba(215, 198, 255, 0.1); margin-bottom: 16px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 20px; color: #F5D061;">✦</span>
+st.markdown("""
+<div class="maryl-nav">
+    <div class="nav-brand">
+        <span class="nav-sparkle">✦</span>
+        <span>RETENTION INTELLIGENCE</span>
+    </div>
+    <div class="nav-links">
+        <a href="#work" class="nav-link">Analytical Folios <span>7</span></a>
+        <a href="#story" class="nav-link">The Story</a>
+        <a href="#manifesto" class="nav-link">Manifesto</a>
+        <a href="#contact" class="nav-contact-btn">Contact / Inquire ↗</a>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Hero Section with Kinetic Masks (Replicating Maryl's Hero)
+# ---------------------------------------------------------
+st.markdown("""
+<div class="hero-container" id="top">
+    <div class="hero-eyebrow">
+        <span>✦</span> THOUGHTFUL BY DATA. RETENTION BY DESIGN. A LITTLE MAGIC.
+    </div>
+    <h1 class="hero-title_giant" style="font-size: clamp(38px, 6vw, 70px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: #FFFFFF; margin: 0 auto; max-width: 950px;">
+        Thoughtful by <em>design.</em><br>
+        Predictive by <em>data.</em><br>
+        A little <em>magic.</em>
+    </h1>
+    <p class="hero-sub-p">
+        An empirical investigation into 10,000 European retail banking accounts across France, Germany, and Spain. 
+        Evaluating customer stickiness, product depth, and silent capital flight.
+    </p>
+    
+    <!-- 3D Floating Perspective Banking Artifact (Replicating Maryl's 3D Perspective Card) -->
+    <div class="artifact-3d-wrapper">
+        <div class="artifact-3d-card">
+            <div class="artifact-glow-ring">🏛️</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
+                EUROPEAN CENTRAL BANK BENCHMARK &bull; AUDITED PORTFOLIO
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 8px 0;">
+                €764.86 Million <em style="color: #B3E6DB; font-style: italic;">Monitored.</em>
+            </div>
+            <p style="font-size: 14px; color: #C9C2E0; line-height: 1.6; margin: 0;">
+                Demonstrating how active transacting velocity and the optimal 2-product anchor protect over <strong>€50.12 Million in deposit capital</strong> from silent flight.
+            </p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Story Chapters (Replicating Maryl's HeroStory Section)
+# ---------------------------------------------------------
+st.markdown("""
+<div id="story">
+    <div class="chapter-section">
+        <div class="chapter-grid">
             <div>
-                <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.3px;">RETENTION LAB</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #D7C6FF; letter-spacing: 1px;">DATA &bull; DESIGN &bull; INTENTION</div>
+                <div class="chapter-eyebrow">CHAPTER 01 &bull; BEHAVIOR OVER DEMOGRAPHICS</div>
+                <h2 class="chapter-title">Human by<br><em>design.</em></h2>
+            </div>
+            <div class="chapter-text">
+                Traditional banking routinely confuses ledger solvency with customer commitment. 
+                A customer maintaining six figures who never transacts is not a loyal customer—they are 
+                an unengaged depositor quietly awaiting the next yield shift. We model banking through genuine 
+                human engagement.
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
 
-    st.markdown("#### 🌍 Jurisdiction & Demographics")
+    <div class="chapter-section">
+        <div class="chapter-grid">
+            <div>
+                <div class="chapter-eyebrow">CHAPTER 02 &bull; ECONOMETRIC RIGOR</div>
+                <h2 class="chapter-title">Magic by<br><em>code.</em></h2>
+            </div>
+            <div class="chapter-text">
+                From Pearson's Chi-Square Contingency tests to Mann-Whitney U distributions and Random Forest 
+                permutation rankings: empirical proof that behavioral metrics dominate traditional salary 
+                and credit scores by an order of magnitude.
+            </div>
+        </div>
+    </div>
+
+    <div class="chapter-section">
+        <div class="chapter-grid">
+            <div>
+                <div class="chapter-eyebrow">CHAPTER 03 &bull; CAPITAL PRESERVATION</div>
+                <h2 class="chapter-title">More than<br><em>numbers.</em></h2>
+            </div>
+            <div class="chapter-text">
+                Safeguarding over <strong>€50.12 Million</strong> in liquidity reserves and protecting 
+                <strong>€1.25 Million</strong> in recurring annual Net Interest Margin. Aligning retail banking 
+                with Basel III and European Central Bank prudential liquidity standards.
+            </div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Manifesto Section with Rotating Sparkle Star (Exact Maryl Replica)
+# ---------------------------------------------------------
+st.markdown("""
+<div class="manifesto-box" id="manifesto">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase; margin-bottom: 12px;">
+        GOOD BANKING MAKES SENSE. GREAT RETENTION UNDERSTANDS BEHAVIOR.
+    </div>
+    <div class="manifesto-title">
+        Equal parts <span>intention,</span> intuition 
+        <svg class="manifesto-star-svg" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
+        </svg> 
+        & a little <span>unexpected.</span>
+    </div>
+    <div class="manifesto-note">
+        From the first deposit sweep to the deepest relationship anchor.<br>
+        We model it. We simulate it. We safeguard it.
+    </div>
+    <svg viewBox="0 0 1000 200" class="ribbon-svg">
+        <path d="M-20 150C180-20 250 220 440 75S600 200 490 155S700-30 1020 130" fill="none" stroke="currentColor" stroke-width="2.5"></path>
+    </svg>
+</div>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Case Showcase Preview Cards (Replicating Maryl's Project Cards)
+# ---------------------------------------------------------
+st.markdown("""
+<div style="margin-bottom: 20px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
+        PORTFOLIO SHOWCASE
+    </div>
+    <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin-top: 4px;">
+        Core Empirical Discoveries.
+    </div>
+</div>
+
+<div class="showcase-grid">
+    <div class="showcase-card">
+        <div class="showcase-card-num">FOLIO 01</div>
+        <div class="showcase-card-h">The 2-Product Golden Zone</div>
+        <p class="showcase-card-p">
+            Moving from 1 to 2 products plunges churn from <strong>27.71% down to 7.58%</strong> (a 72.6% relative collapse in attrition).
+        </p>
+    </div>
+    <div class="showcase-card">
+        <div class="showcase-card-num">FOLIO 02</div>
+        <div class="showcase-card-h">High-Balance Flight Paradox</div>
+        <p class="showcase-card-p">
+            Customers with &gt;€100k balance control <strong>€312.27 Million</strong> (40.8% of portfolio), yet 49.1% are dormant with a 32.8% churn flight risk.
+        </p>
+    </div>
+    <div class="showcase-card">
+        <div class="showcase-card-num">FOLIO 03</div>
+        <div class="showcase-card-h">The German Banking Anomaly</div>
+        <p class="showcase-card-p">
+            100% of German accounts carry positive balances (€119,730 average), yet experience <strong>32.44% churn</strong>—double France and Spain.
+        </p>
+    </div>
+    <div class="showcase-card">
+        <div class="showcase-card-num">FOLIO 04</div>
+        <div class="showcase-card-h">Relationship Strength Index (RSI)</div>
+        <p class="showcase-card-p">
+            A composite 0–100 behavioral scoring model that proves retained customers score <strong>60.0</strong> vs <strong>42.8</strong> for departing accounts.
+        </p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<br><br>", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Interactive Work Studio & Telemetry Controls
+# ---------------------------------------------------------
+st.markdown("""
+<div id="work" style="margin-bottom: 25px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px;">
+        <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
+                ✦ INTERACTIVE WORK STUDIO
+            </div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: #FFFFFF; margin-top: 4px;">
+                Live Analytical Folios.
+            </div>
+        </div>
+        <div style="font-size: 13px; color: #A59DBF;">
+            Toggle below to explore spatial 3D models, simulation engines & lead rosters.
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Sidebar Filter Controls
+with st.sidebar:
+    st.markdown("### ✦ Tactical Cohort Filtering")
     geo_list = sorted(raw_df['Geography'].unique().tolist())
     selected_geos = st.multiselect("Geography", geo_list, default=geo_list)
 
     gender_list = sorted(raw_df['Gender'].unique().tolist())
     selected_genders = st.multiselect("Gender", gender_list, default=gender_list)
 
-    st.markdown("---")
-    st.markdown("#### ⚡ Activity & Product Depth")
-    activity_filter = st.radio("Activity Status", ["All Accounts", "Active Members Only", "Inactive Members Only"])
+    activity_filter = st.radio("Activity State", ["All Accounts", "Active Members Only", "Inactive Members Only"])
 
     all_prods = sorted(raw_df['NumOfProducts'].unique().tolist())
     selected_prods = st.multiselect("Products Held", all_prods, default=all_prods)
 
-    st.markdown("---")
-    st.markdown("#### 💶 Balance & Salary Bounds")
     bal_min, bal_max = int(raw_df['Balance'].min()), int(raw_df['Balance'].max())
     bal_range = st.slider("Ledger Balance (€)", bal_min, bal_max, (bal_min, bal_max), step=5000)
 
     sal_min, sal_max = int(raw_df['EstimatedSalary'].min()), int(raw_df['EstimatedSalary'].max())
     sal_range = st.slider("Estimated Salary (€)", sal_min, sal_max, (sal_min, sal_max), step=5000)
 
-# Filter application
 filtered_df = raw_df[
     (raw_df['Geography'].isin(selected_geos)) &
     (raw_df['Gender'].isin(selected_genders)) &
@@ -378,48 +747,17 @@ if activity_filter == "Active Members Only":
 elif activity_filter == "Inactive Members Only":
     filtered_df = filtered_df[filtered_df['IsActiveMember'] == 0]
 
-st.sidebar.markdown(f"""
-<div style="background: rgba(35, 23, 51, 0.6); border: 1px solid rgba(215, 198, 255, 0.2); border-radius: 12px; padding: 12px; margin-top: 15px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #A59DBF;">ACTIVE ANALYTICAL COHORT</div>
-    <div style="font-size: 20px; font-weight: 700; color: #B3E6DB; margin-top: 2px;">{len(filtered_df):,} <span style="font-size: 12px; color: #A59DBF;">/ {len(raw_df):,} folios</span></div>
-</div>
-""", unsafe_allow_html=True)
-
 if len(filtered_df) == 0:
     st.error("No customer records match your filter criteria. Adjust the sidebar sliders.")
     st.stop()
 
-# Compute KPIs
 kpis = calculate_portfolio_kpis(filtered_df)
-
-# ---------------------------------------------------------
-# Maryl-Style Hero Header
-# ---------------------------------------------------------
-st.markdown(f"""
-<div class="magic-hero">
-    <div class="magic-eyebrow">
-        <span class="magic-sparkle">✦</span> EQUAL PARTS INTENTION, DATA & A LITTLE <em>MAGIC.</em>
-    </div>
-    <h1 class="magic-title">
-        Customer Engagement & Product Utilization <em>Analytics.</em>
-    </h1>
-    <p class="magic-tagline">
-        Where quantitative banking telemetry meets thoughtful behavioral design: evaluating relationship depth, product retention moats, and silent capital flight across European commercial banking.
-    </p>
-    <div class="magic-metrics-strip">
-        <div class="magic-strip-item">Monitored Liquidity: <strong>€{kpis['total_balance']/1e6:.1f}M</strong></div>
-        <div class="magic-strip-item">Portfolio Baseline Attrition: <strong>{kpis['overall_churn_rate']*100:.2f}%</strong></div>
-        <div class="magic-strip-item">Active Protection Multiplier: <strong>{kpis['err']:.2f}&times;</strong></div>
-        <div class="magic-strip-item">Unengaged VIP Liquidity: <strong>€{kpis['at_risk_balance']/1e6:.1f}M</strong></div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # Primary Navigation Tabs
 # ---------------------------------------------------------
 tab_command, tab_3d_hologram, tab_engagement, tab_products, tab_vip_radar, tab_simulation, tab_methodology = st.tabs([
-    "✦ Executive Pulse",
+    "✦ Executive Telemetry",
     "🪐 3D Relationship Space",
     "⚡ Engagement Dynamics",
     "📦 The 2-Product Golden Zone",
@@ -429,53 +767,58 @@ tab_command, tab_3d_hologram, tab_engagement, tab_products, tab_vip_radar, tab_s
 ])
 
 # =========================================================
-# TAB 1: EXECUTIVE PULSE
+# TAB 1: EXECUTIVE TELEMETRY
 # =========================================================
 with tab_command:
     m1, m2, m3, m4, m5 = st.columns(5)
     
     with m1:
         st.markdown(f"""
-        <div class="magic-card">
-            <div class="magic-card-eyebrow">Portfolio Churn</div>
-            <div class="magic-card-val">{kpis['overall_churn_rate']*100:.2f}%</div>
-            <span class="pill-rose">{kpis['churned_customers']:,} exited / {kpis['total_customers']:,}</span>
+        <div class="showcase-card">
+            <div class="showcase-card-num">METRIC I</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">PORTFOLIO CHURN</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['overall_churn_rate']*100:.2f}%</div>
+            <span class="pill-rose" style="display:inline-block; background:rgba(251,113,133,0.12); border:1px solid rgba(251,113,133,0.3); color:#FB7185; padding:3px 8px; border-radius:9999px; font-size:11px;">{kpis['churned_customers']:,} exited</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m2:
         st.markdown(f"""
-        <div class="magic-card">
-            <div class="magic-card-eyebrow">Engagement Ratio</div>
-            <div class="magic-card-val">{kpis['err']:.2f}&times;</div>
-            <span class="pill-mint">Active: {kpis['active_churn_rate']*100:.1f}% vs Inact: {kpis['inactive_churn_rate']*100:.1f}%</span>
+        <div class="showcase-card">
+            <div class="showcase-card-num">METRIC II</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">ENGAGEMENT RATIO</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['err']:.2f}&times;</div>
+            <span class="pill-mint" style="display:inline-block; background:rgba(179,230,219,0.12); border:1px solid rgba(179,230,219,0.3); color:#B3E6DB; padding:3px 8px; border-radius:9999px; font-size:11px;">Active: {kpis['active_churn_rate']*100:.1f}% vs Inact: {kpis['inactive_churn_rate']*100:.1f}%</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m3:
         st.markdown(f"""
-        <div class="magic-card">
-            <div class="magic-card-eyebrow">VIP Disengagement</div>
-            <div class="magic-card-val">{kpis['hbdr']*100:.2f}%</div>
-            <span class="pill-gold">{kpis['inactive_high_bal_count']:,} VIPs Dormant (>€100k)</span>
+        <div class="showcase-card">
+            <div class="showcase-card-num">METRIC III</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">VIP DISENGAGEMENT</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['hbdr']*100:.2f}%</div>
+            <span class="pill-gold" style="display:inline-block; background:rgba(245,208,97,0.12); border:1px solid rgba(245,208,97,0.3); color:#F5D061; padding:3px 8px; border-radius:9999px; font-size:11px;">{kpis['inactive_high_bal_count']:,} VIPs Dormant</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m4:
         st.markdown(f"""
-        <div class="magic-card">
-            <div class="magic-card-eyebrow">Capital At Risk</div>
-            <div class="magic-card-val">€{kpis['at_risk_balance']/1e6:.1f}M</div>
-            <span class="pill-rose">{kpis['pct_balance_at_risk']:.1f}% of total balance</span>
+        <div class="showcase-card">
+            <div class="showcase-card-num">METRIC IV</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">CAPITAL AT RISK</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{kpis['at_risk_balance']/1e6:.1f}M</div>
+            <span class="pill-rose" style="display:inline-block; background:rgba(251,113,133,0.12); border:1px solid rgba(251,113,133,0.3); color:#FB7185; padding:3px 8px; border-radius:9999px; font-size:11px;">{kpis['pct_balance_at_risk']:.1f}% of ledger</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m5:
         st.markdown(f"""
-        <div class="magic-card">
-            <div class="magic-card-eyebrow">Card Stickiness Delta</div>
-            <div class="magic-card-val">{kpis['cc_stickiness_delta']:+.2f}%</div>
-            <span class="pill-lavender">p = 0.492 (Zero direct lift)</span>
+        <div class="showcase-card">
+            <div class="showcase-card-num">METRIC V</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">CARD STICKINESS</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['cc_stickiness_delta']:+.2f}%</div>
+            <span class="pill-lavender" style="display:inline-block; background:rgba(215,198,255,0.12); border:1px solid rgba(215,198,255,0.3); color:#D7C6FF; padding:3px 8px; border-radius:9999px; font-size:11px;">p = 0.492 (Zero direct lift)</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -488,7 +831,7 @@ with tab_command:
         fig_g1 = go.Figure(go.Indicator(
             mode="gauge+number+delta",
             value=kpis['overall_churn_rate'] * 100,
-            title={'text': "<b>Portfolio Churn Risk</b><br><span style='font-size:12px;color:#A59DBF'>Target Benchmark < 12.0%</span>", 'font': {'family': 'Playfair Display, serif', 'color': '#FFFFFF'}},
+            title={'text': "<b>Portfolio Churn Risk</b><br><span style='font-size:12px;color:#A59DBF'>Regulatory Benchmark < 12.0%</span>", 'font': {'family': 'Playfair Display, serif', 'color': '#FFFFFF'}},
             delta={'reference': 12.0, 'increasing': {'color': '#FB7185'}, 'decreasing': {'color': '#B3E6DB'}},
             gauge={
                 'axis': {'range': [0, 40], 'tickcolor': '#A59DBF'},
@@ -581,7 +924,7 @@ with tab_command:
         st.plotly_chart(fig_tree, width='stretch')
 
 # =========================================================
-# TAB 2: 3D RELATIONSHIP SPACE (VELVET NOIR 3D)
+# TAB 2: 3D RELATIONSHIP SPACE
 # =========================================================
 with tab_3d_hologram:
     st.subheader("🪐 3D Spatial Relationship Landscape")
@@ -643,7 +986,6 @@ with tab_3d_hologram:
     else:
         cam_eye = dict(x=1.4, y=-1.4, z=1.2)
 
-    # 3D layout without duplicate keyword argument
     fig_3d.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
@@ -772,7 +1114,6 @@ with tab_products:
         ).reset_index()
 
         fig_golden = go.Figure()
-        # Bar Trace: Customer Volume
         fig_golden.add_trace(go.Bar(
             x=prod_kpis['NumOfProducts'],
             y=prod_kpis['Count'],
@@ -781,7 +1122,6 @@ with tab_products:
             marker_color='rgba(215, 198, 255, 0.35)',
             marker_line=dict(color='#D7C6FF', width=1.5)
         ))
-        # Line Trace: Churn Rate
         fig_golden.add_trace(go.Scatter(
             x=prod_kpis['NumOfProducts'],
             y=prod_kpis['ChurnRate'],
@@ -794,7 +1134,6 @@ with tab_products:
             marker=dict(size=10, color='#FF007A')
         ))
 
-        # Explicit Layout Settings without conflicting unpacked dictionaries
         fig_golden.update_layout(
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
@@ -849,28 +1188,27 @@ with tab_products:
         fig_cc_active.update_layout(yaxis_tickformat='.0%')
         st.plotly_chart(fig_cc_active, width='stretch')
 
-    # 3 Analytical Findings Cards
     b1, b2, b3 = st.columns(3)
     with b1:
         st.markdown("""
-        <div class="magic-card">
-            <div class="magic-card-eyebrow">1 PRODUCT VULNERABILITY</div>
+        <div class="showcase-card">
+            <div class="showcase-card-num">1 PRODUCT VULNERABILITY</div>
             <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FB7185; margin: 4px 0;">27.71% Churn</div>
             <p style="font-size: 13px; color: #C9C2E0; margin: 0;">50.8% of customers hold no secondary anchors, resulting in near-zero switching resistance.</p>
         </div>
         """, unsafe_allow_html=True)
     with b2:
         st.markdown("""
-        <div class="magic-card" style="border-color: rgba(179, 230, 219, 0.4); box-shadow: 0 0 25px rgba(179, 230, 219, 0.12);">
-            <div class="magic-card-eyebrow" style="color: #B3E6DB;">THE 2-PRODUCT GOLDEN ZONE</div>
+        <div class="showcase-card" style="border-color: rgba(179, 230, 219, 0.4); box-shadow: 0 0 25px rgba(179, 230, 219, 0.12);">
+            <div class="showcase-card-num" style="color: #B3E6DB;">THE 2-PRODUCT GOLDEN ZONE</div>
             <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #B3E6DB; margin: 4px 0;">7.58% Churn (&minus;72.6%)</div>
             <p style="font-size: 13px; color: #C9C2E0; margin: 0;">The mathematical optimum: pairing checking with savings or mortgage maximizes loyalty.</p>
         </div>
         """, unsafe_allow_html=True)
     with b3:
         st.markdown("""
-        <div class="magic-card" style="border-color: rgba(251, 113, 133, 0.35);">
-            <div class="magic-card-eyebrow" style="color: #FB7185;">MULTI-PRODUCT HOCKEY STICK</div>
+        <div class="showcase-card" style="border-color: rgba(251, 113, 133, 0.35);">
+            <div class="showcase-card-num" style="color: #FB7185;">MULTI-PRODUCT HOCKEY STICK</div>
             <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FB7185; margin: 4px 0;">82.7% to 100% Churn</div>
             <p style="font-size: 13px; color: #C9C2E0; margin: 0;">Forced bundling beyond 2 products triggers customer alienation, fee fatigue, and immediate flight.</p>
         </div>
@@ -915,7 +1253,6 @@ with tab_vip_radar:
     with col_vm3:
         st.metric("Average Relationship Strength (RSI)", f"{vip_leads['RelationshipStrengthIndex'].mean():.1f} / 100")
 
-    # Individual Radar Dossier
     st.markdown("### 📡 Individual Customer Radar Dossier")
     if len(vip_leads) > 0:
         dossier_options = [f"{row['CustomerId']} - {row['Surname']} (€{row['Balance']:,.0f})" for _, row in vip_leads.head(50).iterrows()]
@@ -964,8 +1301,8 @@ with tab_vip_radar:
 
         with r_right:
             st.markdown(f"""
-            <div class="magic-card">
-                <div class="magic-card-eyebrow">CUSTOMER PROFILE #{cust_record['CustomerId']}</div>
+            <div class="showcase-card">
+                <div class="showcase-card-num">CUSTOMER PROFILE #{cust_record['CustomerId']}</div>
                 <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">
                     {cust_record['Surname']}, {cust_record['Geography']}
                 </div>
@@ -1060,17 +1397,17 @@ with tab_simulation:
         o1, o2 = st.columns(2)
         with o1:
             st.markdown(f"""
-            <div class="magic-card">
-                <div class="magic-card-eyebrow">Projected Portfolio Churn</div>
-                <div class="magic-card-val">{sim_res['simulated_churn_rate']*100:.2f}%</div>
+            <div class="showcase-card">
+                <div class="showcase-card-num">PROJECTED OUTCOME</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{sim_res['simulated_churn_rate']*100:.2f}%</div>
                 <span class="pill-mint">Down from {sim_res['baseline_churn_rate']*100:.2f}% (&minus;{sim_res['churn_rate_reduction_bps']:.0f} bps)</span>
             </div>
             """, unsafe_allow_html=True)
         with o2:
             st.markdown(f"""
-            <div class="magic-card">
-                <div class="magic-card-eyebrow">Customer Accounts Retained</div>
-                <div class="magic-card-val">{sim_res['total_customers_saved']:,}</div>
+            <div class="showcase-card">
+                <div class="showcase-card-num">CLIENT PROTECTION</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{sim_res['total_customers_saved']:,}</div>
                 <span class="pill-lavender">Accounts Prevented from Exiting</span>
             </div>
             """, unsafe_allow_html=True)
@@ -1080,17 +1417,17 @@ with tab_simulation:
         o3, o4 = st.columns(2)
         with o3:
             st.markdown(f"""
-            <div class="magic-card">
-                <div class="magic-card-eyebrow">Deposit Capital Preserved</div>
-                <div class="magic-card-val">€{sim_res['total_capital_preserved']/1e6:.2f}M</div>
+            <div class="showcase-card">
+                <div class="showcase-card-num">LIQUIDITY PRESERVED</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{sim_res['total_capital_preserved']/1e6:.2f}M</div>
                 <span class="pill-mint">Protected from Liquidity Run-Off</span>
             </div>
             """, unsafe_allow_html=True)
         with o4:
             st.markdown(f"""
-            <div class="magic-card">
-                <div class="magic-card-eyebrow">Annual Net Interest Margin Protected</div>
-                <div class="magic-card-val">€{sim_res['annual_revenue_protected']/1e6:.2f}M</div>
+            <div class="showcase-card">
+                <div class="showcase-card-num">NET INTEREST REVENUE</div>
+                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{sim_res['annual_revenue_protected']/1e6:.2f}M</div>
                 <span class="pill-mint">At {sim_nim:.2f}% Annual Spread</span>
             </div>
             """, unsafe_allow_html=True)
@@ -1173,27 +1510,36 @@ with tab_methodology:
         st.plotly_chart(fig_or, width='stretch')
 
 # ---------------------------------------------------------
-# Maryl Gonzalez-Inspired Contact & Inquiry Card
+# Exact Maryl Gonzalez Contact Section (#contact)
 # ---------------------------------------------------------
 st.markdown("""
-<div class="magic-contact-box" id="contact">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #D7C6FF; letter-spacing: 2px; text-transform: uppercase;">
-        <span style="color: #F5D061;">✦</span> HAVE AN INQUIRY OR RETENTION MANDATE?
+<div class="contact-section" id="contact">
+    <div class="contact-top">
+        <p class="contact-eyebrow">HAVE SOMETHING IN MIND?</p>
+        <span class="contact-spark-text">GOOD THINGS START WITH A CONVERSATION.</span>
     </div>
-    <div style="font-size: 13px; color: #A59DBF; margin-top: 4px; letter-spacing: 0.5px;">
-        GOOD THINGS START WITH A CONVERSATION.
+    
+    <a href="mailto:aryan.analytics@example.com" class="contact-title-big">
+        <span>Let's make customer retention <em>magic.</em></span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: #D7C6FF;">
+            <path d="M7 7h10v10"></path>
+            <path d="M7 17 17 7"></path>
+        </svg>
+    </a>
+    
+    <div style="margin: 20px 0;">
+        <svg class="manifesto-star-svg" viewBox="0 0 100 100" fill="currentColor" style="width: 44px; height: 44px;">
+            <path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
+        </svg>
     </div>
-    <div class="magic-contact-heading">
-        Let’s make customer retention <em>magic.</em>
-    </div>
-    <div style="display: flex; gap: 20px; align-items: center; margin-top: 18px; flex-wrap: wrap;">
-        <a href="mailto:aryan.analytics@example.com" style="color: #FFFFFF; font-size: 16px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #D7C6FF; padding-bottom: 2px;">
-            aryan.analytics@example.com ↗
-        </a>
-        <span style="color: #A59DBF; font-size: 13px;">&bull;</span>
-        <span style="color: #D7C6FF; font-family: 'JetBrains Mono', monospace; font-size: 12px;">Unified Mentor Banking Analytics Fellow</span>
-        <span style="color: #A59DBF; font-size: 13px;">&bull;</span>
-        <span style="color: #B3E6DB; font-family: 'JetBrains Mono', monospace; font-size: 12px;">European Central Bank Case Framework</span>
+
+    <div class="contact-bottom">
+        <div>
+            <a href="mailto:aryan.analytics@example.com" class="contact-email-link">aryan.analytics@example.com ↗</a>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A59DBF;">
+            Unified Mentor Analytics Fellow &bull; European Central Bank Case Framework
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1203,7 +1549,7 @@ st.markdown("""
 # ---------------------------------------------------------
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #A59DBF; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 10px 0;">
-    RETENTION INTELLIGENCE &bull; DESIGN, DATA & A LITTLE MAGIC &bull; DEVELOPED BY ARYAN
+<div style="text-align: center; color: #A59DBF; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 12px 0;">
+    ✦ DESIGN, TECHNOLOGY & A LITTLE MAGIC &bull; DEVELOPED BY ARYAN &bull; UNIFIED MENTOR BANKING STUDY
 </div>
 """, unsafe_allow_html=True)

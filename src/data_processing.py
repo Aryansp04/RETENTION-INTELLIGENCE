@@ -194,3 +194,4 @@ def calculate_portfolio_kpis(df: pd.DataFrame) -> dict:
         'avg_rsi_churned': avg_rsi_churned,
         'avg_rsi_overall': df['RelationshipStrengthIndex'].mean(),
     }
+
