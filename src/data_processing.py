@@ -170,6 +170,8 @@ def calculate_portfolio_kpis(df: pd.DataFrame) -> dict:
     # 5. Relationship Strength Index (RSI) Summary
     avg_rsi_retained = df[df['Exited'] == 0]['RelationshipStrengthIndex'].mean()
     avg_rsi_churned = df[df['Exited'] == 1]['RelationshipStrengthIndex'].mean()
+    avg_rsi_overall = df['RelationshipStrengthIndex'].mean()
+    product_depth_index = df['NumOfProducts'].mean()
 
     return {
         'total_customers': total_customers,
@@ -179,9 +181,12 @@ def calculate_portfolio_kpis(df: pd.DataFrame) -> dict:
         'active_churn_rate': active_churn,
         'inactive_churn_rate': inactive_churn,
         'err': err,
+        'engagement_retention_ratio': err,
         'churn_odds_ratio': churn_odds_ratio,
         'pdi_by_prod': pdi_by_prod,
+        'product_depth_index': product_depth_index,
         'hbdr': hbdr,
+        'high_balance_disengagement_rate': hbdr,
         'total_high_bal_count': total_high_bal,
         'inactive_high_bal_count': inactive_high_bal,
         'total_balance': total_balance,
@@ -190,8 +195,10 @@ def calculate_portfolio_kpis(df: pd.DataFrame) -> dict:
         'cc_retention': cc_retention,
         'non_cc_retention': non_cc_retention,
         'cc_stickiness_delta': cc_stickiness_delta,
+        'credit_card_stickiness_score': cc_stickiness_delta / 100.0,
         'avg_rsi_retained': avg_rsi_retained,
         'avg_rsi_churned': avg_rsi_churned,
-        'avg_rsi_overall': df['RelationshipStrengthIndex'].mean(),
+        'avg_rsi_overall': avg_rsi_overall,
+        'avg_relationship_strength': avg_rsi_overall,
     }
 

@@ -55,9 +55,142 @@ html, body, [class*="css"] {
     background-attachment: fixed;
 }
 
+/* ========== CINEMATIC THEATER INTRO CURTAIN ========== */
+.intro-curtain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #120E1C;
+    background-image: 
+        radial-gradient(circle at 50% 40%, rgba(102, 88, 255, 0.28) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(215, 198, 255, 0.15) 0%, transparent 50%),
+        #120E1C;
+    z-index: 99999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    animation: curtainLift 0.95s cubic-bezier(0.85, 0, 0.15, 1) 2.2s forwards;
+}
+
+@keyframes curtainLift {
+    0% { transform: translateY(0); opacity: 1; visibility: visible; }
+    80% { transform: translateY(-100%); opacity: 1; }
+    100% { transform: translateY(-100%); opacity: 0; visibility: hidden; display: none; }
+}
+
+.intro-curtain-card {
+    text-align: center;
+    max-width: 620px;
+    padding: 40px;
+    animation: introCardFade 2.1s ease forwards;
+}
+
+@keyframes introCardFade {
+    0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+    18% { opacity: 1; transform: scale(1) translateY(0); }
+    82% { opacity: 1; transform: scale(1) translateY(0); }
+    100% { opacity: 0; transform: translateY(-25px); }
+}
+
+.intro-star-wrap {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px auto;
+    color: #F5D061;
+    filter: drop-shadow(0 0 25px rgba(245, 208, 97, 0.85));
+    animation: spinSparkle 8s linear infinite;
+}
+
+.intro-star-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.intro-eyebrow-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #D7C6FF;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.intro-brand-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(28px, 5.5vw, 44px);
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px 0;
+}
+
+.intro-brand-name em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    background: linear-gradient(135deg, #D7C6FF 0%, #B3E6DB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.intro-sub-text {
+    font-size: 14px;
+    color: #C9C2E0;
+    margin-bottom: 24px;
+}
+
+.intro-bar-track {
+    width: 260px;
+    height: 4px;
+    background: rgba(215, 198, 255, 0.15);
+    border-radius: 9999px;
+    margin: 0 auto 16px auto;
+    overflow: hidden;
+}
+
+.intro-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6658FF, #D7C6FF, #B3E6DB);
+    border-radius: 9999px;
+    animation: introProgressSweep 1.8s cubic-bezier(0.65, 0, 0.35, 1) 0.25s forwards;
+}
+
+@keyframes introProgressSweep {
+    0% { width: 0%; }
+    45% { width: 60%; }
+    80% { width: 88%; }
+    100% { width: 100%; }
+}
+
+.intro-author-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #A59DBF;
+    text-transform: uppercase;
+}
+
+/* ========== KINETIC SCROLL PROGRESS BAR (TOP) ========== */
+.scroll-progress-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #6658FF 0%, #D7C6FF 50%, #B3E6DB 100%);
+    z-index: 9999999;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.1s ease-out;
+    box-shadow: 0 0 10px rgba(102, 88, 255, 0.7);
+}
+
 /* ========== INTRO ANIMATION KEYFRAMES ========== */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(50px); }
+    from { opacity: 0; transform: translateY(45px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -66,34 +199,19 @@ html, body, [class*="css"] {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 @keyframes scaleIn {
     from { opacity: 0; transform: scale(0.92); }
     to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes blurReveal {
-    from { opacity: 0; filter: blur(12px); transform: translateY(20px); }
+    from { opacity: 0; filter: blur(14px); transform: translateY(25px); }
     to { opacity: 1; filter: blur(0); transform: translateY(0); }
-}
-
-@keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-60px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInRight {
-    from { opacity: 0; transform: translateX(60px); }
-    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes floatGently {
     0%, 100% { transform: rotateX(8deg) rotateY(-4deg) translateY(0); }
-    50% { transform: rotateX(6deg) rotateY(-2deg) translateY(-12px); }
+    50% { transform: rotateX(5deg) rotateY(-2deg) translateY(-12px); }
 }
 
 @keyframes spinSparkle {
@@ -111,54 +229,49 @@ html, body, [class*="css"] {
     to { stroke-dashoffset: 0; }
 }
 
-/* ========== INTRO ANIMATION UTILITY CLASSES ========== */
-.intro-hidden {
-    opacity: 0;
-}
-
+/* ========== HERO TIMED ENTRANCE (SYNCHRONIZED WITH CURTAIN LIFT) ========== */
 .intro-fade-up {
-    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .intro-fade-down {
-    animation: fadeInDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .intro-blur-reveal {
-    animation: blurReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: blurReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .intro-scale-in {
-    animation: scaleIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: scaleIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.intro-d1 { animation-delay: 0.1s; }
-.intro-d2 { animation-delay: 0.3s; }
-.intro-d3 { animation-delay: 0.5s; }
-.intro-d4 { animation-delay: 0.7s; }
-.intro-d5 { animation-delay: 0.9s; }
-.intro-d6 { animation-delay: 1.1s; }
-.intro-d7 { animation-delay: 1.3s; }
+.intro-d1 { animation-delay: 2.3s; }
+.intro-d2 { animation-delay: 2.5s; }
+.intro-d3 { animation-delay: 2.7s; }
+.intro-d4 { animation-delay: 2.9s; }
+.intro-d5 { animation-delay: 3.1s; }
 
-/* ========== SCROLL REVEAL SYSTEM ========== */
+/* ========== INTERACTIVE SCROLL TRIGGER SYSTEM ========== */
 .scroll-reveal {
-    opacity: 0;
-    transform: translateY(45px);
+    opacity: 0.25;
+    transform: translateY(35px);
+    filter: blur(2px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    filter: blur(4px);
 }
 
-.scroll-reveal.visible {
+.scroll-reveal.visible,
+.scroll-reveal:hover {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
 }
 
 .scroll-reveal-left {
-    opacity: 0;
-    transform: translateX(-50px);
+    opacity: 0.25;
+    transform: translateX(-40px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -169,8 +282,8 @@ html, body, [class*="css"] {
 }
 
 .scroll-reveal-right {
-    opacity: 0;
-    transform: translateX(50px);
+    opacity: 0.25;
+    transform: translateX(40px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -181,22 +294,46 @@ html, body, [class*="css"] {
 }
 
 .scroll-reveal-scale {
-    opacity: 0;
-    transform: scale(0.9);
+    opacity: 0.3;
+    transform: scale(0.94) translateY(25px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.scroll-reveal-scale.visible {
+.scroll-reveal-scale.visible,
+.scroll-reveal-scale:hover {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
 }
 
-.sr-delay-1 { transition-delay: 0.1s; }
-.sr-delay-2 { transition-delay: 0.2s; }
-.sr-delay-3 { transition-delay: 0.35s; }
-.sr-delay-4 { transition-delay: 0.5s; }
-.sr-delay-5 { transition-delay: 0.65s; }
+.sr-delay-1 { transition-delay: 0.08s; }
+.sr-delay-2 { transition-delay: 0.16s; }
+.sr-delay-3 { transition-delay: 0.24s; }
+.sr-delay-4 { transition-delay: 0.32s; }
+
+/* Native CSS Scroll-Driven Animation (Chrome/Edge Hardware Compositor) */
+@supports (animation-timeline: view()) {
+    .chapter-section {
+        animation: scrollSnapIn linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+    }
+    .showcase-card {
+        animation: scrollCardIn linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 35%;
+    }
+}
+
+@keyframes scrollSnapIn {
+    from { opacity: 0.25; transform: translateY(40px); filter: blur(3px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes scrollCardIn {
+    from { opacity: 0.3; transform: scale(0.95) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
 
 /* ========== NAVIGATION ========== */
 .maryl-nav {
@@ -708,55 +845,96 @@ def get_clean_data():
 raw_df = get_clean_data()
 
 # ---------------------------------------------------------
-# Scroll-Trigger JavaScript (IntersectionObserver on parent)
+# Cinematic Theater Intro Curtain + Scroll Progress Bar
+# ---------------------------------------------------------
+st.markdown("""
+<div class="scroll-progress-line" id="scrollProgressBar"></div>
+
+<div class="intro-curtain-overlay" id="theaterCurtain">
+    <div class="intro-curtain-card">
+        <div class="intro-star-wrap">
+            <svg class="intro-star-svg" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
+            </svg>
+        </div>
+        <div class="intro-eyebrow-text">PORTFOLIO BY ARYAN</div>
+        <h1 class="intro-brand-name">RETENTION <em>INTELLIGENCE</em></h1>
+        <div class="intro-sub-text">Thoughtful by design. Predictive by data. A little magic.</div>
+        <div class="intro-bar-track">
+            <div class="intro-bar-fill"></div>
+        </div>
+        <div class="intro-author-badge">EUROPEAN CENTRAL BANK BENCHMARK &bull; AUDITED 10,000 FOLIOS</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# Robust Scroll-Trigger JavaScript (Tracks Streamlit Scroll Container)
 # ---------------------------------------------------------
 components.html("""
 <script>
 (function() {
-    const parentDoc = window.parent.document;
+    function setupScrollEngine() {
+        try {
+            const parentDoc = window.parent.document;
+            if (!parentDoc) return;
 
-    function initScrollReveal() {
-        const revealSelectors = [
-            '.scroll-reveal',
-            '.scroll-reveal-left',
-            '.scroll-reveal-right',
-            '.scroll-reveal-scale'
-        ];
+            // Streamlit's real scrollable viewport
+            const scrollContainer = parentDoc.querySelector('[data-testid="stAppViewContainer"]') || 
+                                    parentDoc.querySelector('section.main') || 
+                                    parentDoc.documentElement;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            const progressBar = parentDoc.getElementById('scrollProgressBar');
+
+            function onScroll() {
+                const scrollTop = scrollContainer.scrollTop || parentDoc.documentElement.scrollTop || 0;
+                const scrollHeight = (scrollContainer.scrollHeight || parentDoc.documentElement.scrollHeight) - (scrollContainer.clientHeight || window.innerHeight);
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
+
+                if (progressBar) {
+                    progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
                 }
-            });
-        }, {
-            threshold: 0.12,
-            rootMargin: '0px 0px -40px 0px'
-        });
 
-        revealSelectors.forEach(sel => {
-            parentDoc.querySelectorAll(sel).forEach(el => {
-                observer.observe(el);
-            });
-        });
+                // Check and trigger elements
+                const revealElements = parentDoc.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .showcase-card, .chapter-section');
+                const vh = window.innerHeight;
 
-        // Also trigger ribbon-draw animation
-        parentDoc.querySelectorAll('.ribbon-svg').forEach(el => {
-            const ribbonObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                revealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= vh * 0.88) {
+                        el.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.3 });
-            ribbonObserver.observe(el);
-        });
+
+                // Ribbon SVG draw
+                const ribbon = parentDoc.querySelector('.ribbon-svg');
+                if (ribbon) {
+                    const rRect = ribbon.getBoundingClientRect();
+                    if (rRect.top <= vh * 0.85) {
+                        ribbon.classList.add('visible');
+                    }
+                }
+            }
+
+            scrollContainer.addEventListener('scroll', onScroll, { passive: true });
+            window.parent.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // Initial check
+            setTimeout(onScroll, 400);
+            setTimeout(onScroll, 1200);
+            setTimeout(onScroll, 2500);
+        } catch (e) {
+            console.warn("Streamlit scroll engine running with CSS view-timeline fallback:", e);
+        }
     }
 
-    // Run after a brief delay to let Streamlit render
-    setTimeout(initScrollReveal, 600);
-    // Re-run periodically in case new elements are rendered (tab changes, etc.)
-    setInterval(initScrollReveal, 2000);
+    if (document.readyState === 'complete') {
+        setupScrollEngine();
+    } else {
+        window.addEventListener('load', setupScrollEngine);
+    }
+    setTimeout(setupScrollEngine, 500);
 })();
 </script>
 """, height=0)
@@ -784,19 +962,19 @@ st.markdown("""
 # ---------------------------------------------------------
 st.markdown("""
 <div class="hero-container" id="top">
-<div class="hero-eyebrow intro-fade-up intro-d1" style="opacity:0;">
+<div class="hero-eyebrow intro-fade-up intro-d1">
 <span>✦</span> THOUGHTFUL BY DATA. RETENTION BY DESIGN. A LITTLE MAGIC.
 </div>
-<h1 class="hero-title-giant intro-blur-reveal intro-d2" style="opacity:0;">
+<h1 class="hero-title-giant intro-blur-reveal intro-d2">
 Thoughtful by <em>design.</em><br>
 Predictive by <em>data.</em><br>
 A little <em>magic.</em>
 </h1>
-<p class="hero-sub-p intro-fade-up intro-d3" style="opacity:0;">
+<p class="hero-sub-p intro-fade-up intro-d3">
 An empirical investigation into 10,000 European retail banking accounts across France, Germany, and Spain.
 Evaluating customer stickiness, product depth, and silent capital flight.
 </p>
-<div class="artifact-3d-wrapper intro-scale-in intro-d5" style="opacity:0;">
+<div class="artifact-3d-wrapper intro-scale-in intro-d5">
 <div class="artifact-3d-card">
 <div class="artifact-glow-ring">🏛️</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
@@ -1021,22 +1199,22 @@ with tab_command:
 <div class="showcase-card-num">METRIC I</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">PORTFOLIO CHURN</div>
 <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['overall_churn_rate']*100:.2f}%</div>
-<span class="pill-rose">ERR</span>
+<span class="pill-rose">BENCHMARK 20.4%</span>
 </div>""", unsafe_allow_html=True)
 
     with m2:
         st.markdown(f"""<div class="showcase-card">
 <div class="showcase-card-num">METRIC II</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">PRODUCT DEPTH</div>
-<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['product_depth_index']:.3f}</div>
-<span class="pill-lavender">PDI</span>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['product_depth_index']:.2f}</div>
+<span class="pill-lavender">PDI (MEAN PRODS)</span>
 </div>""", unsafe_allow_html=True)
 
     with m3:
         st.markdown(f"""<div class="showcase-card">
 <div class="showcase-card-num">METRIC III</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">HIGH-BAL DISENGAGEMENT</div>
-<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['high_balance_disengagement_rate']*100:.1f}%</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['hbdr']*100:.1f}%</div>
 <span class="pill-rose">HBDR</span>
 </div>""", unsafe_allow_html=True)
 
@@ -1044,7 +1222,7 @@ with tab_command:
         st.markdown(f"""<div class="showcase-card">
 <div class="showcase-card-num">METRIC IV</div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">CREDIT CARD STICKINESS</div>
-<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['credit_card_stickiness_score']*100:.1f}%</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['cc_stickiness_delta']:.1f}%</div>
 <span class="pill-mint">CCSS</span>
 </div>""", unsafe_allow_html=True)
 
