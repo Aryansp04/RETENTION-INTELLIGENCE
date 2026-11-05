@@ -1,7 +1,7 @@
 """
 Customer Engagement & Product Utilization Analytics for Retention Strategy
-Interactive Executive & Analytical Dashboard
-Bright & Lively Executive Fintech Theme (Natural Human-Crafted Aesthetic)
+Executive Retention Intelligence Command Center
+Theme: Emerald & Charcoal (High-Contrast, Crisp Executive Palette)
 Author: Aryan (Internship Portfolio Project)
 """
 
@@ -23,57 +23,66 @@ from src.simulator import simulate_retention_interventions
 # Page Configuration
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="Banking Retention Intelligence | Customer Analytics",
+    page_title="Banking Retention Intelligence | Emerald & Charcoal",
     page_icon="🏦",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ---------------------------------------------------------
-# Bright, Lively, Human-Crafted Fintech CSS Styling
+# Emerald & Charcoal CSS Theme
 # ---------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
     
+    /* Global Charcoal & Emerald Theme */
     html, body, [class*="css"] {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        color: #0F172A;
+        color: #F8FAFC;
     }
     
     .stApp {
-        background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+        background: radial-gradient(circle at 15% 15%, #131E31 0%, #0B0F19 65%, #070A12 100%);
     }
 
-    /* Executive Hero Banner */
-    .hero-banner {
-        background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #0284C7 100%);
+    /* Hero Banner */
+    .hero-banner-emerald {
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #064E3B 100%);
+        border: 1px solid rgba(16, 185, 129, 0.4);
         border-radius: 18px;
-        padding: 28px 32px;
-        color: #FFFFFF;
+        padding: 26px 32px;
         margin-bottom: 24px;
-        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.15);
         position: relative;
     }
 
-    .hero-badge {
+    .hero-badge-emerald {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        background: rgba(255, 255, 255, 0.18);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: #FFFFFF;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        color: #34D399;
+        font-family: 'JetBrains Mono', monospace;
         font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0.8px;
+        letter-spacing: 1px;
         text-transform: uppercase;
-        padding: 4px 12px;
+        padding: 5px 12px;
         border-radius: 9999px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
-    .hero-title {
+    .status-dot-emerald {
+        width: 8px;
+        height: 8px;
+        background-color: #10B981;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #34D399;
+    }
+
+    .hero-title-emerald {
         font-size: 28px;
         font-weight: 800;
         margin: 0;
@@ -81,115 +90,94 @@ st.markdown("""
         color: #FFFFFF;
     }
 
-    .hero-subtitle {
-        color: #E0E7FF;
+    .hero-subtitle-emerald {
+        color: #94A3B8;
         font-size: 14px;
         margin-top: 6px;
         font-weight: 400;
-        max-width: 900px;
         line-height: 1.5;
     }
 
-    /* Bright, Crisp Metric Cards */
-    .kpi-card-bright {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 14px;
+    /* Charcoal Metric Cards with Emerald Accents */
+    .metric-card-charcoal {
+        background: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 16px;
         padding: 20px 22px;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        position: relative;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        transition: all 0.2s ease;
     }
     
-    .kpi-card-bright:hover {
+    .metric-card-charcoal:hover {
         transform: translateY(-3px);
-        box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
-        border-color: #93C5FD;
+        border-color: rgba(16, 185, 129, 0.6);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
     }
 
-    .kpi-card-title {
-        font-size: 12px;
+    .metric-title-charcoal {
+        font-size: 11px;
+        font-family: 'JetBrains Mono', monospace;
         text-transform: uppercase;
-        color: #64748B;
-        letter-spacing: 0.6px;
+        color: #94A3B8;
+        letter-spacing: 1px;
         font-weight: 700;
         margin-bottom: 8px;
     }
 
-    .kpi-card-val {
+    .metric-val-charcoal {
         font-size: 28px;
         font-weight: 800;
-        color: #0F172A;
+        color: #FFFFFF;
         letter-spacing: -0.5px;
         margin-bottom: 8px;
     }
 
-    .pill-green {
-        color: #065F46;
-        background: #D1FAE5;
-        border: 1px solid #A7F3D0;
+    .tag-emerald {
+        color: #34D399;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(52, 211, 153, 0.35);
         font-size: 12px;
-        font-weight: 600;
-        padding: 3px 8px;
+        font-weight: 700;
+        padding: 4px 10px;
         border-radius: 6px;
         display: inline-block;
     }
 
-    .pill-red {
-        color: #991B1B;
-        background: #FEE2E2;
-        border: 1px solid #FECACA;
+    .tag-coral {
+        color: #F87171;
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(248, 113, 113, 0.35);
         font-size: 12px;
-        font-weight: 600;
-        padding: 3px 8px;
+        font-weight: 700;
+        padding: 4px 10px;
         border-radius: 6px;
         display: inline-block;
     }
 
-    .pill-blue {
-        color: #1E40AF;
-        background: #DBEAFE;
-        border: 1px solid #BFDBFE;
+    .tag-amber {
+        color: #FBBF24;
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid rgba(251, 191, 36, 0.35);
         font-size: 12px;
-        font-weight: 600;
-        padding: 3px 8px;
+        font-weight: 700;
+        padding: 4px 10px;
         border-radius: 6px;
         display: inline-block;
     }
 
-    .pill-amber {
-        color: #92400E;
-        background: #FEF3C7;
-        border: 1px solid #FDE68A;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 3px 8px;
-        border-radius: 6px;
-        display: inline-block;
-    }
-
-    /* Content Cards */
-    .content-box-bright {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 14px;
-        padding: 24px;
-        margin-bottom: 22px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    }
-
-    /* Streamlit Tabs Customization */
+    /* Charcoal Navigation Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
-        background: #E2E8F0;
+        background: #111827;
         padding: 6px;
-        border-radius: 12px;
+        border-radius: 14px;
+        border: 1px solid #1F2937;
     }
     
     .stTabs [data-baseweb="tab"] {
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 10px 18px;
-        color: #475569;
+        color: #94A3B8;
         font-weight: 600;
         font-size: 13px;
         background: transparent;
@@ -197,39 +185,49 @@ st.markdown("""
     }
     
     .stTabs [aria-selected="true"] {
-        background: #FFFFFF !important;
-        color: #1E3A8A !important;
+        background: #1E293B !important;
+        color: #34D399 !important;
         font-weight: 700 !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid rgba(16, 185, 129, 0.5) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(16, 185, 129, 0.2) !important;
     }
 
-    /* Sidebar Styling */
+    /* Sidebar Dark Charcoal */
     section[data-testid="stSidebar"] {
-        background-color: #FFFFFF;
-        border-right: 1px solid #E2E8F0;
+        background-color: #0F172A;
+        border-right: 1px solid #1E293B;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Clean Bright Plotly Layout Template (No keyword conflicts)
+# Unified Chart Styling Helper (Zero Duplicate Kwarg Collisions)
 # ---------------------------------------------------------
-BRIGHT_LAYOUT = dict(
-    paper_bgcolor='rgba(255,255,255,0)',
-    plot_bgcolor='rgba(255,255,255,0)',
-    font=dict(family='Plus Jakarta Sans, sans-serif', color='#475569', size=12),
-    xaxis=dict(
-        gridcolor='#F1F5F9',
-        zerolinecolor='#CBD5E1',
-        tickfont=dict(color='#64748B')
-    ),
-    yaxis=dict(
-        gridcolor='#F1F5F9',
-        zerolinecolor='#CBD5E1',
-        tickfont=dict(color='#64748B')
-    ),
-    margin=dict(l=20, r=20, t=40, b=20)
-)
+def style_chart(fig, height=380, title=None):
+    """
+    Applies charcoal & emerald dark theme consistently
+    WITHOUT unpacked keyword collisions on xaxis or yaxis.
+    """
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(family='Plus Jakarta Sans, sans-serif', color='#CBD5E1', size=12),
+        height=height,
+        margin=dict(l=20, r=20, t=45 if title else 25, b=25)
+    )
+    if title:
+        fig.update_layout(title=dict(text=title, font=dict(color='#F8FAFC', size=14)))
+    fig.update_xaxes(
+        gridcolor='rgba(255,255,255,0.07)',
+        zerolinecolor='rgba(255,255,255,0.12)',
+        tickfont=dict(color='#94A3B8')
+    )
+    fig.update_yaxes(
+        gridcolor='rgba(255,255,255,0.07)',
+        zerolinecolor='rgba(255,255,255,0.12)',
+        tickfont=dict(color='#94A3B8')
+    )
+    return fig
 
 # ---------------------------------------------------------
 # Data Ingestion
@@ -248,10 +246,14 @@ raw_df = get_clean_data()
 # ---------------------------------------------------------
 with st.sidebar:
     st.markdown("""
-    <div style="padding: 10px 0 16px 0;">
-        <span style="font-size: 28px;">🏦</span>
-        <span style="font-size: 18px; font-weight: 800; color: #1E3A8A; margin-left: 8px;">RETENTION HUB</span>
-        <div style="font-size: 11px; color: #64748B; font-weight: 600;">Executive Decision Support System</div>
+    <div style="padding: 12px 0 16px 0; border-bottom: 1px solid #1E293B; margin-bottom: 15px;">
+        <div style="font-size: 26px;">🏦</div>
+        <div style="font-size: 16px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; margin-top: 4px;">
+            RETENTION INTELLIGENCE
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #34D399; letter-spacing: 1px;">
+            CHARCOAL &bull; EMERALD EDITION
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -267,10 +269,10 @@ with st.sidebar:
     activity_filter = st.radio("Activity Status", ["All Accounts", "Active Members Only", "Inactive Members Only"])
 
     all_prods = sorted(raw_df['NumOfProducts'].unique().tolist())
-    selected_prods = st.multiselect("Product Count", all_prods, default=all_prods)
+    selected_prods = st.multiselect("Product Count Tier", all_prods, default=all_prods)
 
     st.markdown("---")
-    st.markdown("#### 💶 Balance & Salary")
+    st.markdown("#### 💶 Balance & Salary Bounds")
     bal_min, bal_max = int(raw_df['Balance'].min()), int(raw_df['Balance'].max())
     bal_range = st.slider("Ledger Balance (€)", bal_min, bal_max, (bal_min, bal_max), step=5000)
 
@@ -294,36 +296,37 @@ elif activity_filter == "Inactive Members Only":
     filtered_df = filtered_df[filtered_df['IsActiveMember'] == 0]
 
 st.sidebar.markdown(f"""
-<div style="background: #F1F5F9; border: 1px solid #CBD5E1; border-radius: 8px; padding: 10px; margin-top: 15px;">
-    <div style="font-size: 11px; font-weight: 700; color: #475569;">FILTERED SAMPLE</div>
-    <div style="font-size: 18px; font-weight: 800; color: #1E3A8A;">{len(filtered_df):,} <span style="font-size: 12px; color: #64748B;">/ {len(raw_df):,} accounts</span></div>
+<div style="background: #1E293B; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 12px; margin-top: 15px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94A3B8;">ACTIVE SAMPLE</div>
+    <div style="font-size: 20px; font-weight: 800; color: #34D399;">{len(filtered_df):,} <span style="font-size: 12px; color: #64748B;">/ {len(raw_df):,} accounts</span></div>
 </div>
 """, unsafe_allow_html=True)
 
 if len(filtered_df) == 0:
-    st.error("No customer records match the current filter selection. Please relax sidebar sliders.")
+    st.error("No customer records match your filter criteria. Adjust the sidebar sliders.")
     st.stop()
 
 # Compute portfolio KPIs
 kpis = calculate_portfolio_kpis(filtered_df)
 
 # ---------------------------------------------------------
-# Bright Hero Header Banner
+# Hero Banner
 # ---------------------------------------------------------
 st.markdown(f"""
-<div class="hero-banner">
-    <div class="hero-badge">
-        PORTFOLIO INTELLIGENCE &bull; 10,000 ACCOUNTS &bull; UNIFIED MENTOR BANKING STUDY
+<div class="hero-banner-emerald">
+    <div class="hero-badge-emerald">
+        <span class="status-dot-emerald"></span>
+        SYSTEM TELEMETRY &bull; 10,000 ACCOUNTS AUDITED &bull; ECB CASE FRAMEWORK
     </div>
-    <h1 class="hero-title">Customer Engagement & Product Utilization Analytics</h1>
-    <p class="hero-subtitle">
-        Evaluating the empirical relationship between behavioral engagement, product depth, and deposit retention across European retail banking.
+    <h1 class="hero-title-emerald">Customer Engagement & Product Utilization Analytics</h1>
+    <p class="hero-subtitle-emerald">
+        Empirical Behavioral Science, Deposit Capital Preservation & Relationship Strength Optimization | Unified Mentor European Banking Research
     </p>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Navigation Tabs
+# Primary Navigation Tabs
 # ---------------------------------------------------------
 tab_command, tab_3d_hologram, tab_engagement, tab_products, tab_vip_radar, tab_simulation, tab_methodology = st.tabs([
     "📊 Executive Summary",
@@ -331,8 +334,8 @@ tab_command, tab_3d_hologram, tab_engagement, tab_products, tab_vip_radar, tab_s
     "⚡ Engagement Dynamics",
     "📦 The 2-Product Golden Zone",
     "🎯 VIP Lead Detector & Dossier",
-    "📈 What-If Strategy Simulator",
-    "📑 Research Findings & Tests"
+    "📈 What-If Capital Engine",
+    "📑 Empirical Research Tests"
 ])
 
 # =========================================================
@@ -344,102 +347,99 @@ with tab_command:
     
     with m1:
         st.markdown(f"""
-        <div class="kpi-card-bright">
-            <div class="kpi-card-title">Portfolio Churn Rate</div>
-            <div class="kpi-card-val">{kpis['overall_churn_rate']*100:.2f}%</div>
-            <span class="pill-red">{kpis['churned_customers']:,} exited accounts</span>
+        <div class="metric-card-charcoal">
+            <div class="metric-title-charcoal">Portfolio Churn Rate</div>
+            <div class="metric-val-charcoal">{kpis['overall_churn_rate']*100:.2f}%</div>
+            <span class="tag-coral">{kpis['churned_customers']:,} exited / {kpis['total_customers']:,}</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m2:
         st.markdown(f"""
-        <div class="kpi-card-bright">
-            <div class="kpi-card-title">Engagement Retention Ratio</div>
-            <div class="kpi-card-val">{kpis['err']:.2f}x</div>
-            <span class="pill-green">Active Churn: {kpis['active_churn_rate']*100:.1f}%</span>
+        <div class="metric-card-charcoal">
+            <div class="metric-title-charcoal">Engagement Retention Ratio</div>
+            <div class="metric-val-charcoal">{kpis['err']:.2f}x</div>
+            <span class="tag-emerald">Active: {kpis['active_churn_rate']*100:.1f}% vs Inactive: {kpis['inactive_churn_rate']*100:.1f}%</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m3:
         st.markdown(f"""
-        <div class="kpi-card-bright">
-            <div class="kpi-card-title">High-Bal. Disengagement</div>
-            <div class="kpi-card-val">{kpis['hbdr']*100:.2f}%</div>
-            <span class="pill-amber">{kpis['inactive_high_bal_count']:,} VIPs Inactive (>€100k)</span>
+        <div class="metric-card-charcoal">
+            <div class="metric-title-charcoal">High-Bal. Disengagement</div>
+            <div class="metric-val-charcoal">{kpis['hbdr']*100:.2f}%</div>
+            <span class="tag-amber">{kpis['inactive_high_bal_count']:,} VIPs Inactive (>€100k)</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m4:
         st.markdown(f"""
-        <div class="kpi-card-bright">
-            <div class="kpi-card-title">Capital At Flight Risk</div>
-            <div class="kpi-card-val">€{kpis['at_risk_balance']/1e6:.1f}M</div>
-            <span class="pill-red">{kpis['pct_balance_at_risk']:.1f}% of total balance</span>
+        <div class="metric-card-charcoal">
+            <div class="metric-title-charcoal">Capital At Flight Risk</div>
+            <div class="metric-val-charcoal">€{kpis['at_risk_balance']/1e6:.1f}M</div>
+            <span class="tag-coral">{kpis['pct_balance_at_risk']:.1f}% of total deposits</span>
         </div>
         """, unsafe_allow_html=True)
 
     with m5:
         st.markdown(f"""
-        <div class="kpi-card-bright">
-            <div class="kpi-card-title">Credit Card Stickiness Delta</div>
-            <div class="kpi-card-val">{kpis['cc_stickiness_delta']:+.2f}%</div>
-            <span class="pill-blue">p = 0.492 (Zero direct lift)</span>
+        <div class="metric-card-charcoal">
+            <div class="metric-title-charcoal">Credit Card Passivity Delta</div>
+            <div class="metric-val-charcoal">{kpis['cc_stickiness_delta']:+.2f}%</div>
+            <span class="tag-emerald">p = 0.492 (Zero direct lift)</span>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Dial & Sunburst Row
+    # Dial Gauges & Sunburst Row
     col_g1, col_g2, col_g3 = st.columns([1, 1, 1.2])
 
     with col_g1:
-        # Gauge 1: Portfolio Churn
         fig_g1 = go.Figure(go.Indicator(
             mode="gauge+number+delta",
             value=kpis['overall_churn_rate'] * 100,
-            title={'text': "<b>Observed Churn Rate</b><br><span style='font-size:12px;color:#64748B'>Target Benchmark < 12.0%</span>"},
+            title={'text': "<b>Portfolio Churn Risk</b><br><span style='font-size:12px;color:#94A3B8'>Target Benchmark < 12.0%</span>", 'font': {'color': '#F8FAFC'}},
             delta={'reference': 12.0, 'increasing': {'color': '#EF4444'}, 'decreasing': {'color': '#10B981'}},
             gauge={
-                'axis': {'range': [0, 40], 'tickcolor': '#64748B'},
+                'axis': {'range': [0, 40], 'tickcolor': '#94A3B8'},
                 'bar': {'color': '#EF4444'},
-                'bgcolor': '#F8FAFC',
+                'bgcolor': '#0F172A',
                 'borderwidth': 1,
-                'bordercolor': '#CBD5E1',
+                'bordercolor': '#334155',
                 'steps': [
-                    {'range': [0, 12], 'color': '#D1FAE5'},
-                    {'range': [12, 25], 'color': '#FEF3C7'},
-                    {'range': [25, 40], 'color': '#FEE2E2'}
+                    {'range': [0, 12], 'color': 'rgba(16, 185, 129, 0.25)'},
+                    {'range': [12, 25], 'color': 'rgba(245, 158, 11, 0.25)'},
+                    {'range': [25, 40], 'color': 'rgba(239, 68, 68, 0.35)'}
                 ],
             }
         ))
-        fig_g1.update_layout(paper_bgcolor='rgba(0,0,0,0)', height=260, margin=dict(l=20, r=20, t=50, b=20))
+        fig_g1.update_layout(paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#F8FAFC'), height=260, margin=dict(l=20, r=20, t=50, b=20))
         st.plotly_chart(fig_g1, width='stretch')
 
     with col_g2:
-        # Gauge 2: Average Relationship Strength Index (RSI)
         avg_rsi = filtered_df['RelationshipStrengthIndex'].mean()
         fig_g2 = go.Figure(go.Indicator(
             mode="gauge+number",
             value=avg_rsi,
-            title={'text': "<b>Mean Relationship Strength (RSI)</b><br><span style='font-size:12px;color:#64748B'>Score Scale: 0 to 100</span>"},
+            title={'text': "<b>Mean Relationship Strength (RSI)</b><br><span style='font-size:12px;color:#94A3B8'>Scale: 0 to 100</span>", 'font': {'color': '#F8FAFC'}},
             gauge={
-                'axis': {'range': [0, 100], 'tickcolor': '#64748B'},
-                'bar': {'color': '#2563EB'},
-                'bgcolor': '#F8FAFC',
+                'axis': {'range': [0, 100], 'tickcolor': '#94A3B8'},
+                'bar': {'color': '#10B981'},
+                'bgcolor': '#0F172A',
                 'borderwidth': 1,
-                'bordercolor': '#CBD5E1',
+                'bordercolor': '#334155',
                 'steps': [
-                    {'range': [0, 40], 'color': '#FEE2E2'},
-                    {'range': [40, 70], 'color': '#FEF3C7'},
-                    {'range': [70, 100], 'color': '#DBEAFE'}
+                    {'range': [0, 40], 'color': 'rgba(239, 68, 68, 0.3)'},
+                    {'range': [40, 70], 'color': 'rgba(245, 158, 11, 0.25)'},
+                    {'range': [70, 100], 'color': 'rgba(16, 185, 129, 0.3)'}
                 ],
             }
         ))
-        fig_g2.update_layout(paper_bgcolor='rgba(0,0,0,0)', height=260, margin=dict(l=20, r=20, t=50, b=20))
+        fig_g2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#F8FAFC'), height=260, margin=dict(l=20, r=20, t=50, b=20))
         st.plotly_chart(fig_g2, width='stretch')
 
     with col_g3:
-        # Macro Sunburst Chart
         sunburst_sample = filtered_df.sample(min(3000, len(filtered_df)), random_state=42).copy()
         sunburst_sample['Activity'] = sunburst_sample['IsActiveMember'].map({1: 'Active', 0: 'Inactive'})
         sunburst_sample['ProductTier'] = sunburst_sample['NumOfProducts'].apply(lambda x: f"{x} Prod")
@@ -452,7 +452,7 @@ with tab_command:
             color_discrete_map={'Retained': '#10B981', 'Churned': '#EF4444'},
             title="Portfolio Hierarchy (Geography > Products > Activity > Churn)"
         )
-        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', height=260, margin=dict(l=10, r=10, t=40, b=10))
+        fig_sun.update_layout(paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#F8FAFC'), height=260, margin=dict(l=10, r=10, t=40, b=10))
         st.plotly_chart(fig_sun, width='stretch')
 
     st.markdown("---")
@@ -469,13 +469,14 @@ with tab_command:
             x='EngagementProfile',
             y='ChurnRate',
             color='AvgBalance',
-            color_continuous_scale=['#3B82F6', '#10B981', '#F59E0B', '#EF4444'],
+            color_continuous_scale=['#064E3B', '#10B981', '#F59E0B', '#EF4444'],
             text=[f"{v*100:.1f}%" for v in cohort_df['ChurnRate']],
-            labels={'ChurnRate': 'Churn Rate', 'EngagementProfile': 'Cohort', 'AvgBalance': 'Avg Balance (€)'},
+            labels={'ChurnRate': 'Observed Churn', 'EngagementProfile': 'Cohort', 'AvgBalance': 'Avg Balance (€)'},
             title="Churn Rate by Behavioral Profile (Color = Mean Balance €)"
         )
         fig_cohort.update_traces(textposition='outside')
-        fig_cohort.update_layout(**BRIGHT_LAYOUT, height=360, xaxis_tickangle=-15)
+        style_chart(fig_cohort, height=360)
+        fig_cohort.update_layout(xaxis_tickangle=-15)
         st.plotly_chart(fig_cohort, width='stretch')
 
     with c_tree:
@@ -487,28 +488,26 @@ with tab_command:
             color_continuous_scale=['#10B981', '#F59E0B', '#EF4444'],
             title="Deposit Volume Share by Segment"
         )
-        fig_tree.update_layout(paper_bgcolor='rgba(0,0,0,0)', height=360, margin=dict(l=10, r=10, t=40, b=10))
+        fig_tree.update_layout(paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#F8FAFC'), height=360, margin=dict(l=10, r=10, t=40, b=10))
         st.plotly_chart(fig_tree, width='stretch')
 
 # =========================================================
-# TAB 2: 3D CUSTOMER SPACE (CLEAN, BRIGHT & ERROR-FREE)
+# TAB 2: 3D CUSTOMER SPACE (COMPLETELY ERROR-FREE)
 # =========================================================
 with tab_3d_hologram:
     st.subheader("🌐 3D Customer Relationship Space")
-    st.caption("Interact and rotate in 3D: Customer Age vs. Ledger Balance vs. Product Depth.")
+    st.caption("Interact, zoom, and rotate in 3D: Customer Age vs. Ledger Balance vs. Product Depth.")
 
-    # 3D Controls
     col_3d_ctrl1, col_3d_ctrl2, col_3d_ctrl3 = st.columns(3)
     with col_3d_ctrl1:
-        color_by_3d = st.selectbox("Color Data By", ["Exited (Retention vs Churn)", "EngagementProfile", "RelationshipStrengthIndex"])
+        color_by_3d = st.selectbox("Color Coordinate By", ["Exited (Retention vs Churn)", "EngagementProfile", "RelationshipStrengthIndex"])
     with col_3d_ctrl2:
-        sample_size_3d = st.slider("Customer Sample Density", min_value=500, max_value=min(3000, len(filtered_df)), value=min(1500, len(filtered_df)), step=250)
+        sample_size_3d = st.slider("3D Sample Count", min_value=500, max_value=min(3000, len(filtered_df)), value=min(1500, len(filtered_df)), step=250)
     with col_3d_ctrl3:
-        camera_angle = st.selectbox("Camera Perspective", ["Isometric Perspective", "Top View (Age vs Balance)", "Side View (Products vs Balance)"])
+        camera_angle = st.selectbox("Perspective Viewpoint", ["Isometric Perspective", "Top View (Age vs Balance)", "Side View (Products vs Balance)"])
 
     hologram_sample = filtered_df.sample(sample_size_3d, random_state=42).copy()
 
-    # Configure Color Mapping with bright lively colors
     if color_by_3d == "Exited (Retention vs Churn)":
         hologram_sample['Outcome'] = hologram_sample['Exited'].map({0: 'Retained (Loyal)', 1: 'Churned (Exited)'})
         fig_3d = px.scatter_3d(
@@ -519,7 +518,7 @@ with tab_3d_hologram:
             color='Outcome',
             size='RelationshipStrengthIndex',
             size_max=12,
-            opacity=0.75,
+            opacity=0.8,
             color_discrete_map={'Retained (Loyal)': '#10B981', 'Churned (Exited)': '#EF4444'},
             hover_name='Surname',
             hover_data={
@@ -530,7 +529,7 @@ with tab_3d_hologram:
                 'RelationshipStrengthIndex': ':.1f',
                 'Geography': True
             },
-            title="3D Customer Behavioral Space (Size = Relationship Strength Index)"
+            title="3D Customer Space (Size = Relationship Strength Index)"
         )
     else:
         fig_3d = px.scatter_3d(
@@ -541,14 +540,13 @@ with tab_3d_hologram:
             color=color_by_3d,
             size='RelationshipStrengthIndex',
             size_max=12,
-            opacity=0.75,
-            color_continuous_scale=['#3B82F6', '#10B981', '#F59E0B', '#EF4444'],
+            opacity=0.8,
+            color_continuous_scale=['#064E3B', '#10B981', '#F59E0B', '#EF4444'],
             hover_name='Surname',
             hover_data={'CustomerId': True, 'Age': True, 'Balance': ':.2f', 'NumOfProducts': True},
             title=f"3D Space Colored by {color_by_3d}"
         )
 
-    # Set camera perspective
     if camera_angle == "Top View (Age vs Balance)":
         cam_eye = dict(x=0, y=0, z=2.2)
     elif camera_angle == "Side View (Products vs Balance)":
@@ -556,15 +554,15 @@ with tab_3d_hologram:
     else:
         cam_eye = dict(x=1.4, y=-1.4, z=1.2)
 
-    # Update 3D Layout cleanly WITHOUT duplicate keyword arguments
+    # 3D layout without duplicate keyword argument
     fig_3d.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Plus Jakarta Sans, sans-serif', color='#475569'),
+        font=dict(family='Plus Jakarta Sans, sans-serif', color='#CBD5E1'),
         scene=dict(
-            xaxis=dict(title='Age (Years)', backgroundcolor='#FFFFFF', gridcolor='#E2E8F0', showbackground=True),
-            yaxis=dict(title='Balance (€)', backgroundcolor='#FFFFFF', gridcolor='#E2E8F0', showbackground=True),
-            zaxis=dict(title='Product Count', tickvals=[1, 2, 3, 4], backgroundcolor='#FFFFFF', gridcolor='#E2E8F0', showbackground=True),
+            xaxis=dict(title='Age (Years)', backgroundcolor='#0F172A', gridcolor='#334155', showbackground=True),
+            yaxis=dict(title='Balance (€)', backgroundcolor='#0F172A', gridcolor='#334155', showbackground=True),
+            zaxis=dict(title='Product Count', tickvals=[1, 2, 3, 4], backgroundcolor='#0F172A', gridcolor='#334155', showbackground=True),
             camera=dict(eye=cam_eye)
         ),
         height=620,
@@ -572,11 +570,14 @@ with tab_3d_hologram:
     )
     st.plotly_chart(fig_3d, width='stretch')
 
-    st.info("""
-    **3D Spatial Insight:** 
-    Notice the clear cluster of red churn markers concentrated at **Age 45–60** with **Balances above €100,000** holding only 1 product or 3+ products. 
-    This group accounts for over **60% of total deposit capital loss**.
-    """)
+    st.markdown("""
+    <div style="background: #1E293B; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px 20px;">
+        <span style="color: #34D399; font-weight: 700;">Spatial Behavioral Takeaway:</span> 
+        Notice the dense cluster of <span style="color: #F87171; font-weight: 700;">red churned points</span> concentrated at 
+        <strong>Age 45–60</strong> with <strong>balances above €100,000 and 1 or 3+ products</strong>. 
+        This cluster represents over 60% of total bank capital flight.
+    </div>
+    """, unsafe_allow_html=True)
 
 # =========================================================
 # TAB 3: ENGAGEMENT DYNAMICS
@@ -588,7 +589,6 @@ with tab_engagement:
     col_e1, col_e2 = st.columns(2)
 
     with col_e1:
-        # Engagement Stacked Bar
         eng_split = filtered_df.groupby('IsActiveMember')['Exited'].agg(
             Count='count',
             ChurnRate='mean'
@@ -613,17 +613,11 @@ with tab_engagement:
             text=[f"{v*100:.1f}%" for v in eng_split['ChurnRate']],
             textposition='inside'
         ))
-        fig_eng.update_layout(
-            **BRIGHT_LAYOUT,
-            barmode='stack',
-            title="Retention vs. Churn by Active Member Status",
-            height=360,
-            yaxis_tickformat='.0%'
-        )
+        style_chart(fig_eng, height=360, title="Retention vs. Churn by Active Status")
+        fig_eng.update_layout(barmode='stack', yaxis_tickformat='.0%')
         st.plotly_chart(fig_eng, width='stretch')
 
     with col_e2:
-        # Geographic Disparity
         geo_split = filtered_df.groupby(['Geography', 'IsActiveMember'])['Exited'].mean().reset_index()
         geo_split['Activity'] = geo_split['IsActiveMember'].map({0: 'Inactive', 1: 'Active'})
 
@@ -634,10 +628,11 @@ with tab_engagement:
             color='Activity',
             barmode='group',
             labels={'Exited': 'Churn Rate'},
-            color_discrete_map={'Inactive': '#EF4444', 'Active': '#2563EB'},
+            color_discrete_map={'Inactive': '#EF4444', 'Active': '#10B981'},
             title="Geographic Churn Comparison Across Activity States"
         )
-        fig_geo.update_layout(**BRIGHT_LAYOUT, height=360, yaxis_tickformat='.1%')
+        style_chart(fig_geo, height=360)
+        fig_geo.update_layout(yaxis_tickformat='.1%')
         st.plotly_chart(fig_geo, width='stretch')
 
     st.markdown("---")
@@ -656,9 +651,9 @@ with tab_engagement:
             points=False,
             color_discrete_map={0: '#10B981', 1: '#EF4444'},
             labels={'IsActiveMember': 'Activity (0 = Inactive, 1 = Active)', 'Balance': 'Ledger Balance (€)'},
-            title="Balance Distribution across Engagement by Churn Status"
+            title="Balance Dispersion by Engagement & Churn Outcome"
         )
-        fig_violin.update_layout(**BRIGHT_LAYOUT, height=380)
+        style_chart(fig_violin, height=380)
         st.plotly_chart(fig_violin, width='stretch')
 
     with v2:
@@ -666,14 +661,14 @@ with tab_engagement:
         fig_heat = px.imshow(
             tenure_heat,
             labels=dict(x="Number of Products", y="Tenure (Years)", color="Churn Rate"),
-            color_continuous_scale=['#D1FAE5', '#FEF3C7', '#EF4444'],
+            color_continuous_scale=['#064E3B', '#10B981', '#F59E0B', '#EF4444'],
             title="Tenure vs. Product Count Churn Heatmap"
         )
-        fig_heat.update_layout(**BRIGHT_LAYOUT, height=380)
+        style_chart(fig_heat, height=380)
         st.plotly_chart(fig_heat, width='stretch')
 
 # =========================================================
-# TAB 4: THE 2-PRODUCT GOLDEN ZONE
+# TAB 4: THE 2-PRODUCT GOLDEN ZONE (FIXED DUAL-AXIS)
 # =========================================================
 with tab_products:
     st.subheader("📦 Product Depth Optimization: The 2-Product Golden Zone")
@@ -688,15 +683,16 @@ with tab_products:
         ).reset_index()
 
         fig_golden = go.Figure()
-        # Bar: Volume
+        # Bar Trace: Customer Volume
         fig_golden.add_trace(go.Bar(
             x=prod_kpis['NumOfProducts'],
             y=prod_kpis['Count'],
             name='Customer Accounts',
             yaxis='y',
-            marker_color='#93C5FD'
+            marker_color='rgba(16, 185, 129, 0.4)',
+            marker_line=dict(color='#10B981', width=1.5)
         ))
-        # Line: Churn Rate
+        # Line Trace: Churn Rate
         fig_golden.add_trace(go.Scatter(
             x=prod_kpis['NumOfProducts'],
             y=prod_kpis['ChurnRate'],
@@ -705,18 +701,39 @@ with tab_products:
             mode='lines+markers+text',
             text=[f"{v*100:.1f}%" for v in prod_kpis['ChurnRate']],
             textposition='top center',
-            line=dict(color='#DC2626', width=3),
-            marker=dict(size=10, color='#DC2626')
+            line=dict(color='#EF4444', width=3),
+            marker=dict(size=10, color='#F87171')
         ))
 
+        # Explicit Layout Settings without conflicting unpacked dictionaries
         fig_golden.update_layout(
-            **BRIGHT_LAYOUT,
-            title="The 2-Product Golden Zone vs. Multi-Product Friction",
-            xaxis=dict(title='Products Held per Customer', tickvals=[1, 2, 3, 4]),
-            yaxis=dict(title='Customer Volume', side='left'),
-            yaxis2=dict(title='Churn Rate', side='right', overlaying='y', tickformat='.0%', range=[0, 1.15]),
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(family='Plus Jakarta Sans, sans-serif', color='#CBD5E1', size=12),
+            title=dict(text="The 2-Product Golden Zone vs. Multi-Product Friction Curve", font=dict(color='#F8FAFC', size=14)),
+            xaxis=dict(
+                title='Products Held per Customer',
+                tickvals=[1, 2, 3, 4],
+                gridcolor='rgba(255,255,255,0.07)',
+                tickfont=dict(color='#94A3B8')
+            ),
+            yaxis=dict(
+                title='Customer Accounts',
+                side='left',
+                gridcolor='rgba(255,255,255,0.07)',
+                tickfont=dict(color='#94A3B8')
+            ),
+            yaxis2=dict(
+                title='Churn Rate',
+                side='right',
+                overlaying='y',
+                tickformat='.0%',
+                range=[0, 1.15],
+                tickfont=dict(color='#EF4444')
+            ),
             height=400,
-            legend=dict(x=0.03, y=0.95)
+            margin=dict(l=20, r=20, t=50, b=20),
+            legend=dict(x=0.03, y=0.95, bgcolor='rgba(15, 23, 42, 0.7)')
         )
         st.plotly_chart(fig_golden, width='stretch')
 
@@ -739,33 +756,34 @@ with tab_products:
             title="Credit Card Retention Conditioned on Activity"
         )
         fig_cc_active.update_traces(textposition='outside')
-        fig_cc_active.update_layout(**BRIGHT_LAYOUT, height=400, yaxis_tickformat='.0%')
+        style_chart(fig_cc_active, height=400)
+        fig_cc_active.update_layout(yaxis_tickformat='.0%')
         st.plotly_chart(fig_cc_active, width='stretch')
 
     # 3 Analytical Findings Cards
     b1, b2, b3 = st.columns(3)
     with b1:
         st.markdown("""
-        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
-            <div style="color: #64748B; font-size: 11px; font-weight: 700; text-transform: uppercase;">1 Product Vulnerability</div>
+        <div style="background: #1E293B; border: 1px solid #334155; border-radius: 12px; padding: 18px;">
+            <div style="color: #94A3B8; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;">1 PRODUCT VULNERABILITY</div>
             <div style="font-size: 22px; font-weight: 800; color: #EF4444; margin: 4px 0;">27.71% Churn</div>
-            <p style="font-size: 13px; color: #64748B; margin: 0;">50.8% of customers have zero secondary product anchors, resulting in near-zero switching friction.</p>
+            <p style="font-size: 13px; color: #94A3B8; margin: 0;">50.8% of customers have zero secondary product anchors, resulting in near-zero switching friction.</p>
         </div>
         """, unsafe_allow_html=True)
     with b2:
         st.markdown("""
-        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
-            <div style="color: #166534; font-size: 11px; font-weight: 700; text-transform: uppercase;">The 2-Product Golden Zone</div>
-            <div style="font-size: 22px; font-weight: 800; color: #16A34A; margin: 4px 0;">7.58% Churn (-72.6%)</div>
-            <p style="font-size: 13px; color: #166534; margin: 0;">The mathematical optimum: pairing checking with a savings or mortgage account maximizes loyalty.</p>
+        <div style="background: #1E293B; border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 12px; padding: 18px; box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);">
+            <div style="color: #34D399; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;">THE 2-PRODUCT GOLDEN ZONE</div>
+            <div style="font-size: 22px; font-weight: 800; color: #10B981; margin: 4px 0;">7.58% Churn (-72.6%)</div>
+            <p style="font-size: 13px; color: #CBD5E1; margin: 0;">The mathematical optimum: pairing checking with a savings or mortgage account maximizes loyalty.</p>
         </div>
         """, unsafe_allow_html=True)
     with b3:
         st.markdown("""
-        <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
-            <div style="color: #991B1B; font-size: 11px; font-weight: 700; text-transform: uppercase;">Multi-Product Friction</div>
-            <div style="font-size: 22px; font-weight: 800; color: #DC2626; margin: 4px 0;">82.7% to 100% Churn</div>
-            <p style="font-size: 13px; color: #991B1B; margin: 0;">Forced bundling beyond 2 products triggers customer alienation, fee fatigue, and immediate attrition.</p>
+        <div style="background: #1E293B; border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 18px; box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);">
+            <div style="color: #F87171; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;">MULTI-PRODUCT HOCKEY STICK</div>
+            <div style="font-size: 22px; font-weight: 800; color: #EF4444; margin: 4px 0;">82.7% to 100% Churn</div>
+            <p style="font-size: 13px; color: #94A3B8; margin: 0;">Forced bundling beyond 2 products triggers customer alienation, fee fatigue, and immediate attrition.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -832,7 +850,7 @@ with tab_vip_radar:
                 r=[c_credit, c_prod, c_act, c_tenure, c_salary, c_credit],
                 theta=radar_categories + [radar_categories[0]],
                 fill='toself',
-                fillcolor='rgba(239, 68, 68, 0.25)',
+                fillcolor='rgba(239, 68, 68, 0.3)',
                 line=dict(color='#EF4444', width=2),
                 name=f"{cust_record['Surname']} Profile"
             ))
@@ -840,14 +858,15 @@ with tab_vip_radar:
                 r=[80, 100, 100, 75, 70, 80],
                 theta=radar_categories + [radar_categories[0]],
                 fill='none',
-                line=dict(color='#2563EB', width=1.5, dash='dash'),
+                line=dict(color='#10B981', width=1.5, dash='dash'),
                 name="Target Benchmark"
             ))
             fig_radar.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#CBD5E1'),
                 polar=dict(
-                    radialaxis=dict(visible=True, range=[0, 100], gridcolor='#E2E8F0'),
-                    angularaxis=dict(gridcolor='#E2E8F0')
+                    radialaxis=dict(visible=True, range=[0, 100], gridcolor='#334155'),
+                    angularaxis=dict(gridcolor='#334155')
                 ),
                 height=340,
                 margin=dict(l=40, r=40, t=20, b=20)
@@ -856,21 +875,21 @@ with tab_vip_radar:
 
         with r_right:
             st.markdown(f"""
-            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                <div style="font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase;">CUSTOMER PROFILE #{cust_record['CustomerId']}</div>
-                <div style="font-size: 22px; font-weight: 800; color: #0F172A; margin: 4px 0;">{cust_record['Surname']}, {cust_record['Geography']}</div>
+            <div style="background: #1E293B; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 20px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: #94A3B8; text-transform: uppercase;">CUSTOMER PROFILE #{cust_record['CustomerId']}</div>
+                <div style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin: 4px 0;">{cust_record['Surname']}, {cust_record['Geography']}</div>
                 <div style="margin: 8px 0;">
-                    <span class="pill-red">{cust_record['RetentionTier']}</span>
-                    <span class="pill-blue">RSI Score: {cust_record['RelationshipStrengthIndex']} / 100</span>
+                    <span class="tag-coral">{cust_record['RetentionTier']}</span>
+                    <span class="tag-emerald">RSI Score: {cust_record['RelationshipStrengthIndex']} / 100</span>
                 </div>
-                <div style="font-size: 13px; color: #475569; line-height: 1.6; margin-top: 10px;">
+                <div style="font-size: 13px; color: #CBD5E1; line-height: 1.6; margin-top: 10px;">
                     &bull; <strong>Ledger Balance:</strong> €{cust_record['Balance']:,.2f}<br>
                     &bull; <strong>Estimated Salary:</strong> €{cust_record['EstimatedSalary']:,.2f}<br>
                     &bull; <strong>Bank Products:</strong> {cust_record['NumOfProducts']} product(s)<br>
                     &bull; <strong>Activity Status:</strong> {'Active Member' if cust_record['IsActiveMember']==1 else 'Inactive / Dormant'}<br>
                     &bull; <strong>Credit Card Held:</strong> {'Yes' if cust_record['HasCrCard']==1 else 'No'}
                 </div>
-                <div style="margin-top: 14px; font-size: 12px; color: #B91C1C; background: #FEF2F2; padding: 10px; border-radius: 8px;">
+                <div style="margin-top: 14px; font-size: 12px; color: #F87171; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); padding: 10px; border-radius: 8px;">
                     ⚠️ <strong>Recommended Action:</strong> Proactively reach out with personalized wealth advisory. Offer 2-product fixed term or automated savings sweeps to avoid capital drain.
                 </div>
             </div>
@@ -950,18 +969,18 @@ with tab_simulation:
         o1, o2 = st.columns(2)
         with o1:
             st.markdown(f"""
-            <div class="kpi-card-bright">
-                <div class="kpi-card-title">Projected Portfolio Churn</div>
-                <div class="kpi-card-val">{sim_res['simulated_churn_rate']*100:.2f}%</div>
-                <span class="pill-green">Down from {sim_res['baseline_churn_rate']*100:.2f}% (-{sim_res['churn_rate_reduction_bps']:.0f} bps)</span>
+            <div class="metric-card-charcoal">
+                <div class="metric-title-charcoal">Projected Portfolio Churn</div>
+                <div class="metric-val-charcoal">{sim_res['simulated_churn_rate']*100:.2f}%</div>
+                <span class="tag-emerald">Down from {sim_res['baseline_churn_rate']*100:.2f}% (-{sim_res['churn_rate_reduction_bps']:.0f} bps)</span>
             </div>
             """, unsafe_allow_html=True)
         with o2:
             st.markdown(f"""
-            <div class="kpi-card-bright">
-                <div class="kpi-card-title">Customer Accounts Retained</div>
-                <div class="kpi-card-val">{sim_res['total_customers_saved']:,}</div>
-                <span class="pill-blue">Accounts Prevented from Exiting</span>
+            <div class="metric-card-charcoal">
+                <div class="metric-title-charcoal">Customer Accounts Retained</div>
+                <div class="metric-val-charcoal">{sim_res['total_customers_saved']:,}</div>
+                <span class="tag-emerald">Accounts Prevented from Exiting</span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -970,18 +989,18 @@ with tab_simulation:
         o3, o4 = st.columns(2)
         with o3:
             st.markdown(f"""
-            <div class="kpi-card-bright">
-                <div class="kpi-card-title">Deposit Capital Preserved</div>
-                <div class="kpi-card-val">€{sim_res['total_capital_preserved']/1e6:.2f}M</div>
-                <span class="pill-green">Protected from Liquidity Run-Off</span>
+            <div class="metric-card-charcoal">
+                <div class="metric-title-charcoal">Deposit Capital Preserved</div>
+                <div class="metric-val-charcoal">€{sim_res['total_capital_preserved']/1e6:.2f}M</div>
+                <span class="tag-emerald">Protected from Liquidity Run-Off</span>
             </div>
             """, unsafe_allow_html=True)
         with o4:
             st.markdown(f"""
-            <div class="kpi-card-bright">
-                <div class="kpi-card-title">Annual Net Interest Margin Protected</div>
-                <div class="kpi-card-val">€{sim_res['annual_revenue_protected']/1e6:.2f}M</div>
-                <span class="pill-blue">At {sim_nim:.2f}% Annual Spread</span>
+            <div class="metric-card-charcoal">
+                <div class="metric-title-charcoal">Annual Net Interest Margin Protected</div>
+                <div class="metric-val-charcoal">€{sim_res['annual_revenue_protected']/1e6:.2f}M</div>
+                <span class="tag-emerald">At {sim_nim:.2f}% Annual Spread</span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -999,12 +1018,12 @@ with tab_simulation:
         x='Strategy',
         y='Capital Saved (€M)',
         color='Capital Saved (€M)',
-        color_continuous_scale=['#93C5FD', '#2563EB', '#1E3A8A'],
+        color_continuous_scale=['#064E3B', '#10B981', '#34D399'],
         text=[f"€{v:.2f}M" for v in strat_data['Capital Saved (€M)']],
         title="Attribution of Capital Preserved Across Intervention Levers (€ Millions)"
     )
     fig_waterfall.update_traces(textposition='outside')
-    fig_waterfall.update_layout(**BRIGHT_LAYOUT, height=360)
+    style_chart(fig_waterfall, height=360)
     st.plotly_chart(fig_waterfall, width='stretch')
 
 # =========================================================
@@ -1040,10 +1059,11 @@ with tab_methodology:
             y='Feature',
             orientation='h',
             color='Importance',
-            color_continuous_scale=['#93C5FD', '#2563EB'],
+            color_continuous_scale=['#064E3B', '#10B981', '#34D399'],
             title="Random Forest Gini Feature Importance"
         )
-        fig_rf.update_layout(**BRIGHT_LAYOUT, yaxis=dict(autorange='reversed'), height=380)
+        style_chart(fig_rf, height=380)
+        fig_rf.update_layout(yaxis=dict(autorange='reversed'))
         st.plotly_chart(fig_rf, width='stretch')
 
     with col_or:
@@ -1056,8 +1076,9 @@ with tab_methodology:
             color_discrete_map={'Risk Factor (+)': '#EF4444', 'Retention Factor (-)': '#10B981'},
             title="Logistic Regression Odds Ratios"
         )
-        fig_or.add_vline(x=1.0, line_dash='dash', line_color='#64748B')
-        fig_or.update_layout(**BRIGHT_LAYOUT, yaxis=dict(autorange='reversed'), height=380)
+        fig_or.add_vline(x=1.0, line_dash='dash', line_color='#94A3B8')
+        style_chart(fig_or, height=380)
+        fig_or.update_layout(yaxis=dict(autorange='reversed'))
         st.plotly_chart(fig_or, width='stretch')
 
 # ---------------------------------------------------------
@@ -1065,7 +1086,7 @@ with tab_methodology:
 # ---------------------------------------------------------
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #64748B; font-size: 12px; padding: 10px 0;">
-    Customer Engagement & Product Utilization Analytics Platform &bull; Developed by Aryan &bull; Unified Mentor Banking Research & European Central Bank Case Framework
+<div style="text-align: center; color: #64748B; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 10px 0;">
+    RETENTION INTELLIGENCE &bull; EMERALD & CHARCOAL EDITION &bull; DEVELOPED BY ARYAN &bull; UNIFIED MENTOR BANKING STUDY
 </div>
 """, unsafe_allow_html=True)
