@@ -1,8 +1,8 @@
 """
 Customer Engagement & Product Utilization Analytics for Retention Strategy
-Full Experience Inspired by Maryl Gonzalez (marylgonzalez.com)
-Complete Scroll-Triggered Story, 3D Perspective Artifacts, Kinetic Line Masks, 
-Manifesto Sparkles, Interactive Case Showcase, 3D Spatial Hologram & Contact Experience
+Cinematic Scroll-Triggered Experience Inspired by Maryl Gonzalez (marylgonzalez.com)
+Intro Animations, GSAP-Style Scroll Reveals, 3D Perspective Artifacts,
+Kinetic Typography, Sparkle Accents & Interactive Case Studio
 Author: Aryan (Internship Portfolio Project)
 """
 
@@ -11,6 +11,7 @@ import sys
 import numpy as np
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 import plotly.express as px
 import plotly.graph_objects as go
 
@@ -31,455 +32,646 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------
-# Full Maryl Gonzalez Aesthetic & Kinetic Scroll CSS
+# Full Aesthetic CSS + Intro Animations + Scroll Reveal Classes
 # ---------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
-    
-    /* Core Velvet Plum Canvas */
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #F8F6F2;
-        scroll-behavior: smooth;
-    }
-    
-    .stApp {
-        background-color: #171323;
-        background-image: 
-            radial-gradient(circle at 10% 10%, rgba(102, 88, 255, 0.15) 0%, transparent 40%),
-            radial-gradient(circle at 90% 20%, rgba(215, 198, 255, 0.12) 0%, transparent 45%),
-            radial-gradient(circle at 50% 90%, rgba(179, 230, 219, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(244, 63, 94, 0.08) 0%, transparent 40%);
-        background-attachment: fixed;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-    /* Fixed Minimalist Navigation Bar */
-    .maryl-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 18px 36px;
-        background: rgba(23, 19, 35, 0.85);
-        border: 1px solid rgba(215, 198, 255, 0.12);
-        border-radius: 9999px;
-        backdrop-filter: blur(20px);
-        margin-bottom: 30px;
-        position: sticky;
-        top: 15px;
-        z-index: 1000;
-        box-shadow: 0 10px 30px rgba(10, 6, 18, 0.5);
-    }
+/* ========== CORE CANVAS ========== */
+html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #F8F6F2;
+    scroll-behavior: smooth;
+}
 
-    .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-        color: #FFFFFF;
-        text-decoration: none;
-    }
+.stApp {
+    background-color: #171323;
+    background-image:
+        radial-gradient(circle at 10% 10%, rgba(102, 88, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(215, 198, 255, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(179, 230, 219, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(244, 63, 94, 0.08) 0%, transparent 40%);
+    background-attachment: fixed;
+}
 
-    .nav-sparkle {
-        color: #F5D061;
-        font-size: 16px;
-        animation: spinSparkle 8s linear infinite;
-        display: inline-block;
-    }
+/* ========== INTRO ANIMATION KEYFRAMES ========== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    @keyframes spinSparkle {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        font-size: 13px;
-        font-weight: 500;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    .nav-link {
-        color: #C9C2E0;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-    .nav-link:hover {
-        color: #D7C6FF;
-    }
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
 
-    .nav-contact-btn {
-        background: rgba(215, 198, 255, 0.12);
-        border: 1px solid rgba(215, 198, 255, 0.35);
-        color: #FFFFFF !important;
-        padding: 8px 18px;
-        border-radius: 9999px;
-        font-size: 12px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-    .nav-contact-btn:hover {
-        background: #6658FF;
-        border-color: #6658FF;
-        box-shadow: 0 0 20px rgba(102, 88, 255, 0.5);
-    }
+@keyframes blurReveal {
+    from { opacity: 0; filter: blur(12px); transform: translateY(20px); }
+    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
 
-    /* Hero Section with Kinetic Line Masks */
-    .hero-container {
-        padding: 60px 20px 40px 20px;
-        text-align: center;
-        position: relative;
-    }
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
 
-    .hero-eyebrow {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: #D7C6FF;
-        margin-bottom: 20px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(215, 198, 255, 0.08);
-        padding: 6px 16px;
-        border-radius: 9999px;
-        border: 1px solid rgba(215, 198, 255, 0.2);
-    }
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
 
-    .hero-title-giant {
-        font-size: clamp(40px, 7vw, 76px);
-        font-weight: 800;
-        line-height: 1.05;
-        letter-spacing: -0.04em;
-        color: #FFFFFF;
-        margin: 0 auto;
-        max-width: 1000px;
-    }
+@keyframes floatGently {
+    0%, 100% { transform: rotateX(8deg) rotateY(-4deg) translateY(0); }
+    50% { transform: rotateX(6deg) rotateY(-2deg) translateY(-12px); }
+}
 
-    .hero-title-giant em {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-style: italic;
-        font-weight: 400;
-        background: linear-gradient(135deg, #D7C6FF 0%, #EAC5ED 40%, #B3E6DB 80%, #FFFFFF 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
-    }
+@keyframes spinSparkle {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-    .hero-sub-p {
-        font-size: 18px;
-        color: #C9C2E0;
-        max-width: 720px;
-        margin: 24px auto 36px auto;
-        line-height: 1.6;
-        font-weight: 400;
-    }
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 30px rgba(102, 88, 255, 0.4); }
+    50% { box-shadow: 0 0 60px rgba(215, 198, 255, 0.6); }
+}
 
-    /* 3D Perspective Banking Artifact */
-    .artifact-3d-wrapper {
-        perspective: 1200px;
-        margin: 40px auto;
-        max-width: 680px;
-    }
+@keyframes ribbonDraw {
+    from { stroke-dashoffset: 2000; }
+    to { stroke-dashoffset: 0; }
+}
 
-    .artifact-3d-card {
-        background: linear-gradient(135deg, rgba(35, 23, 51, 0.85) 0%, rgba(20, 16, 30, 0.95) 100%);
-        border: 1px solid rgba(215, 198, 255, 0.25);
-        border-radius: 28px;
-        padding: 36px 40px;
-        box-shadow: 
-            0 30px 80px -15px rgba(10, 6, 18, 0.9),
-            0 0 50px -10px rgba(102, 88, 255, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        transform: rotateX(8deg) rotateY(-4deg);
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-    }
-    .artifact-3d-card:hover {
-        transform: rotateX(0deg) rotateY(0deg) translateY(-8px);
-        box-shadow: 
-            0 40px 100px -10px rgba(10, 6, 18, 1),
-            0 0 70px rgba(215, 198, 255, 0.35);
-    }
+/* ========== INTRO ANIMATION UTILITY CLASSES ========== */
+.intro-hidden {
+    opacity: 0;
+}
 
-    .artifact-glow-ring {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(102, 88, 255, 0.4) 0%, rgba(23, 19, 35, 0) 70%);
-        border: 1px solid rgba(215, 198, 255, 0.4);
-        font-size: 36px;
-        margin-bottom: 16px;
-        box-shadow: 0 0 30px rgba(102, 88, 255, 0.4);
-    }
+.intro-fade-up {
+    animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-    /* Maryl's Story Chapters (HeroStory Module) */
-    .chapter-section {
-        padding: 50px 0;
-        border-top: 1px solid rgba(215, 198, 255, 0.1);
-    }
+.intro-fade-down {
+    animation: fadeInDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-    .chapter-grid {
-        display: grid;
-        grid-template-columns: 1fr 1.4fr;
-        gap: 40px;
-        align-items: center;
-    }
+.intro-blur-reveal {
+    animation: blurReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-    .chapter-eyebrow {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 11px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #D7C6FF;
-        margin-bottom: 8px;
-    }
+.intro-scale-in {
+    animation: scaleIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-    .chapter-title {
-        font-size: 38px;
-        font-weight: 800;
-        line-height: 1.15;
-        letter-spacing: -0.03em;
-        color: #FFFFFF;
-        margin: 0;
-    }
+.intro-d1 { animation-delay: 0.1s; }
+.intro-d2 { animation-delay: 0.3s; }
+.intro-d3 { animation-delay: 0.5s; }
+.intro-d4 { animation-delay: 0.7s; }
+.intro-d5 { animation-delay: 0.9s; }
+.intro-d6 { animation-delay: 1.1s; }
+.intro-d7 { animation-delay: 1.3s; }
 
-    .chapter-title em {
-        font-family: 'Playfair Display', serif;
-        font-style: italic;
-        font-weight: 400;
-        color: #D7C6FF;
-    }
+/* ========== SCROLL REVEAL SYSTEM ========== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: blur(4px);
+}
 
-    .chapter-text {
-        font-size: 16px;
-        color: #C9C2E0;
-        line-height: 1.7;
-        margin-top: 14px;
-    }
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
 
-    /* Manifesto Section with Spinning Sparkle Star */
-    .manifesto-box {
-        text-align: center;
-        padding: 80px 20px;
-        position: relative;
-    }
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    .manifesto-title {
-        font-size: clamp(32px, 5vw, 56px);
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        color: #FFFFFF;
-        max-width: 900px;
-        margin: 0 auto;
-    }
+.scroll-reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
 
-    .manifesto-title span {
-        font-family: 'Playfair Display', serif;
-        font-style: italic;
-        color: #D7C6FF;
-    }
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    .manifesto-star-svg {
-        display: inline-block;
-        width: 38px;
-        height: 38px;
-        vertical-align: middle;
-        color: #F5D061;
-        margin: 0 10px;
-        filter: drop-shadow(0 0 12px rgba(245, 208, 97, 0.7));
-        animation: spinSparkle 12s linear infinite;
-    }
+.scroll-reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
 
-    .manifesto-note {
-        font-size: 16px;
-        color: #A59DBF;
-        margin-top: 18px;
-        font-style: italic;
-    }
+.scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    /* Wavy Ribbon SVG Fallback */
-    .ribbon-svg {
-        width: 100%;
-        max-width: 800px;
-        height: 70px;
-        margin: 20px auto;
-        display: block;
-        color: rgba(215, 198, 255, 0.25);
-    }
+.scroll-reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
 
-    /* 3D Case Study / Showcase Cards */
-    .showcase-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin-top: 30px;
-    }
+.sr-delay-1 { transition-delay: 0.1s; }
+.sr-delay-2 { transition-delay: 0.2s; }
+.sr-delay-3 { transition-delay: 0.35s; }
+.sr-delay-4 { transition-delay: 0.5s; }
+.sr-delay-5 { transition-delay: 0.65s; }
 
-    .showcase-card {
-        background: linear-gradient(145deg, rgba(35, 23, 51, 0.7) 0%, rgba(20, 16, 30, 0.85) 100%);
-        border: 1px solid rgba(215, 198, 255, 0.16);
-        border-radius: 20px;
-        padding: 28px;
-        box-shadow: 0 16px 36px rgba(10, 6, 18, 0.6);
-        backdrop-filter: blur(16px);
-        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-    }
-    .showcase-card:hover {
-        transform: translateY(-5px) scale(1.01);
-        border-color: rgba(215, 198, 255, 0.4);
-        box-shadow: 0 24px 50px rgba(102, 88, 255, 0.25);
-    }
+/* ========== NAVIGATION ========== */
+.maryl-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 36px;
+    background: rgba(23, 19, 35, 0.85);
+    border: 1px solid rgba(215, 198, 255, 0.12);
+    border-radius: 9999px;
+    backdrop-filter: blur(20px);
+    margin-bottom: 30px;
+    position: sticky;
+    top: 15px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(10, 6, 18, 0.5);
+    animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
 
-    .showcase-card-num {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 11px;
-        letter-spacing: 2px;
-        color: #D7C6FF;
-        margin-bottom: 8px;
-    }
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-decoration: none;
+}
 
-    .showcase-card-h {
-        font-size: 22px;
-        font-weight: 700;
-        color: #FFFFFF;
-        margin: 0 0 8px 0;
-    }
+.nav-sparkle {
+    color: #F5D061;
+    font-size: 16px;
+    animation: spinSparkle 8s linear infinite;
+    display: inline-block;
+}
 
-    .showcase-card-p {
-        font-size: 13px;
-        color: #C9C2E0;
-        line-height: 1.6;
-        margin: 0;
-    }
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 13px;
+    font-weight: 500;
+}
 
-    /* Contact Section (Exact Maryl Replica) */
-    .contact-section {
-        background: linear-gradient(145deg, rgba(35, 23, 51, 0.85) 0%, rgba(18, 14, 28, 0.95) 100%);
-        border: 1px solid rgba(215, 198, 255, 0.22);
-        border-radius: 28px;
-        padding: 48px 56px;
-        margin-top: 60px;
-        box-shadow: 0 30px 80px rgba(10, 6, 18, 0.8);
-        position: relative;
-    }
+.nav-link {
+    color: #C9C2E0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.nav-link:hover { color: #D7C6FF; }
 
-    .contact-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid rgba(215, 198, 255, 0.12);
-        padding-bottom: 20px;
-        margin-bottom: 28px;
-    }
+.nav-contact-btn {
+    background: rgba(215, 198, 255, 0.12);
+    border: 1px solid rgba(215, 198, 255, 0.35);
+    color: #FFFFFF !important;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.nav-contact-btn:hover {
+    background: #6658FF;
+    border-color: #6658FF;
+    box-shadow: 0 0 20px rgba(102, 88, 255, 0.5);
+}
 
-    .contact-eyebrow {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 11px;
-        letter-spacing: 2px;
-        color: #D7C6FF;
-        text-transform: uppercase;
-        margin: 0;
-    }
+/* ========== HERO ========== */
+.hero-container {
+    padding: 60px 20px 40px 20px;
+    text-align: center;
+    position: relative;
+}
 
-    .contact-spark-text {
-        font-size: 12px;
-        color: #A59DBF;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
+.hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #D7C6FF;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(215, 198, 255, 0.08);
+    padding: 6px 16px;
+    border-radius: 9999px;
+    border: 1px solid rgba(215, 198, 255, 0.2);
+}
 
-    .contact-title-big {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(36px, 5.5vw, 64px);
-        color: #FFFFFF;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 16px;
-        line-height: 1.1;
-        transition: color 0.2s ease;
-        margin: 10px 0 30px 0;
-    }
-    .contact-title-big em {
-        font-style: italic;
-        color: #D7C6FF;
-    }
-    .contact-title-big:hover em {
-        color: #B3E6DB;
-    }
+.hero-title-giant {
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    margin: 0 auto;
+    max-width: 1000px;
+}
 
-    .contact-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-top: 1px solid rgba(215, 198, 255, 0.12);
-        padding-top: 24px;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
+.hero-title-giant em {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(135deg, #D7C6FF 0%, #EAC5ED 40%, #B3E6DB 80%, #FFFFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
 
-    .contact-email-link {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        color: #FFFFFF;
-        text-decoration: none;
-        border-bottom: 1px solid #D7C6FF;
-        padding-bottom: 2px;
-    }
+.hero-sub-p {
+    font-size: 18px;
+    color: #C9C2E0;
+    max-width: 720px;
+    margin: 24px auto 36px auto;
+    line-height: 1.6;
+    font-weight: 400;
+}
 
-    /* Streamlit Tab Segmented Bar */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: rgba(23, 19, 35, 0.85);
-        padding: 6px;
-        border-radius: 16px;
-        border: 1px solid rgba(215, 198, 255, 0.14);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 10px;
-        padding: 10px 20px;
-        color: #A59DBF;
-        font-weight: 600;
-        font-size: 13px;
-        background: transparent;
-        transition: all 0.2s ease;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: rgba(102, 88, 255, 0.3) !important;
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-        border: 1px solid rgba(215, 198, 255, 0.4) !important;
-        box-shadow: 0 4px 15px rgba(102, 88, 255, 0.25) !important;
-    }
+/* ========== 3D FLOATING ARTIFACT ========== */
+.artifact-3d-wrapper {
+    perspective: 1200px;
+    margin: 40px auto;
+    max-width: 680px;
+}
 
-    /* Sidebar Dark Velvet */
-    section[data-testid="stSidebar"] {
-        background-color: #120E1C;
-        border-right: 1px solid rgba(215, 198, 255, 0.08);
-    }
+.artifact-3d-card {
+    background: linear-gradient(135deg, rgba(35, 23, 51, 0.85) 0%, rgba(20, 16, 30, 0.95) 100%);
+    border: 1px solid rgba(215, 198, 255, 0.25);
+    border-radius: 28px;
+    padding: 36px 40px;
+    box-shadow:
+        0 30px 80px -15px rgba(10, 6, 18, 0.9),
+        0 0 50px -10px rgba(102, 88, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    animation: floatGently 6s ease-in-out infinite;
+}
+.artifact-3d-card:hover {
+    animation-play-state: paused;
+    transform: rotateX(0deg) rotateY(0deg) translateY(-8px);
+    box-shadow:
+        0 40px 100px -10px rgba(10, 6, 18, 1),
+        0 0 70px rgba(215, 198, 255, 0.35);
+}
+
+.artifact-glow-ring {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(102, 88, 255, 0.4) 0%, rgba(23, 19, 35, 0) 70%);
+    border: 1px solid rgba(215, 198, 255, 0.4);
+    font-size: 36px;
+    margin-bottom: 16px;
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* ========== STORY CHAPTERS ========== */
+.chapter-section {
+    padding: 50px 0;
+    border-top: 1px solid rgba(215, 198, 255, 0.1);
+}
+
+.chapter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.chapter-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #D7C6FF;
+    margin-bottom: 8px;
+}
+
+.chapter-title {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.chapter-title em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #D7C6FF;
+}
+
+.chapter-text {
+    font-size: 16px;
+    color: #C9C2E0;
+    line-height: 1.7;
+    margin-top: 14px;
+}
+
+/* ========== MANIFESTO ========== */
+.manifesto-box {
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+}
+
+.manifesto-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.manifesto-title span {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #D7C6FF;
+}
+
+.manifesto-star-svg {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    vertical-align: middle;
+    color: #F5D061;
+    margin: 0 10px;
+    filter: drop-shadow(0 0 12px rgba(245, 208, 97, 0.7));
+    animation: spinSparkle 12s linear infinite;
+}
+
+.manifesto-note {
+    font-size: 16px;
+    color: #A59DBF;
+    margin-top: 18px;
+    font-style: italic;
+}
+
+.ribbon-svg {
+    width: 100%;
+    max-width: 800px;
+    height: 70px;
+    margin: 20px auto;
+    display: block;
+    color: rgba(215, 198, 255, 0.25);
+}
+
+.ribbon-svg path {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+}
+
+.ribbon-svg.visible path {
+    animation: ribbonDraw 2.5s ease forwards;
+}
+
+/* ========== SHOWCASE CARDS ========== */
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.showcase-card {
+    background: linear-gradient(145deg, rgba(35, 23, 51, 0.7) 0%, rgba(20, 16, 30, 0.85) 100%);
+    border: 1px solid rgba(215, 198, 255, 0.16);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 16px 36px rgba(10, 6, 18, 0.6);
+    backdrop-filter: blur(16px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+.showcase-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    border-color: rgba(215, 198, 255, 0.4);
+    box-shadow: 0 24px 50px rgba(102, 88, 255, 0.25);
+}
+
+.showcase-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #D7C6FF;
+    margin-bottom: 8px;
+}
+
+.showcase-card-h {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 8px 0;
+}
+
+.showcase-card-p {
+    font-size: 13px;
+    color: #C9C2E0;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ========== STATUS PILLS ========== */
+.pill-rose {
+    display: inline-block;
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid rgba(244, 63, 94, 0.4);
+    color: #FB7185;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.pill-lavender {
+    display: inline-block;
+    background: rgba(215, 198, 255, 0.12);
+    border: 1px solid rgba(215, 198, 255, 0.35);
+    color: #D7C6FF;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.pill-mint {
+    display: inline-block;
+    background: rgba(179, 230, 219, 0.12);
+    border: 1px solid rgba(179, 230, 219, 0.35);
+    color: #B3E6DB;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact-section {
+    background: linear-gradient(145deg, rgba(35, 23, 51, 0.85) 0%, rgba(18, 14, 28, 0.95) 100%);
+    border: 1px solid rgba(215, 198, 255, 0.22);
+    border-radius: 28px;
+    padding: 48px 56px;
+    margin-top: 60px;
+    box-shadow: 0 30px 80px rgba(10, 6, 18, 0.8);
+    position: relative;
+}
+
+.contact-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(215, 198, 255, 0.12);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+}
+
+.contact-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #D7C6FF;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.contact-spark-text {
+    font-size: 12px;
+    color: #A59DBF;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.contact-title-big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5.5vw, 64px);
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    line-height: 1.1;
+    transition: color 0.2s ease;
+    margin: 10px 0 30px 0;
+}
+.contact-title-big em {
+    font-style: italic;
+    color: #D7C6FF;
+}
+.contact-title-big:hover em {
+    color: #B3E6DB;
+}
+
+.contact-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(215, 198, 255, 0.12);
+    padding-top: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.contact-email-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 1px solid #D7C6FF;
+    padding-bottom: 2px;
+}
+
+/* ========== STREAMLIT OVERRIDES ========== */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background: rgba(23, 19, 35, 0.85);
+    padding: 6px;
+    border-radius: 16px;
+    border: 1px solid rgba(215, 198, 255, 0.14);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.stTabs [data-baseweb="tab"] {
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #A59DBF;
+    font-weight: 600;
+    font-size: 13px;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.stTabs [aria-selected="true"] {
+    background: rgba(102, 88, 255, 0.3) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(215, 198, 255, 0.4) !important;
+    box-shadow: 0 4px 15px rgba(102, 88, 255, 0.25) !important;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #120E1C;
+    border-right: 1px solid rgba(215, 198, 255, 0.08);
+}
+
+/* ========== INSIGHT CALLOUT ========== */
+.insight-callout {
+    background: rgba(35, 23, 51, 0.7);
+    border: 1px solid rgba(215, 198, 255, 0.2);
+    border-radius: 14px;
+    padding: 16px 22px;
+    font-size: 14px;
+    color: #C9C2E0;
+    line-height: 1.6;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Plotly Chart Styling Helper (Velvet Night, Mint & Lavender)
+# Plotly Chart Styling Helper
 # ---------------------------------------------------------
 def style_magic_chart(fig, height=390, title=None):
     """
-    Styles Plotly charts with Maryl Gonzalez's velvet night, lavender, and mint aesthetic
+    Styles Plotly charts with velvet night, lavender, and mint aesthetic
     without any duplicate keyword argument collisions on axes.
     """
     fig.update_layout(
@@ -516,199 +708,251 @@ def get_clean_data():
 raw_df = get_clean_data()
 
 # ---------------------------------------------------------
-# Minimalist Floating Header / Navigation (Replicating Maryl's Header)
+# Scroll-Trigger JavaScript (IntersectionObserver on parent)
+# ---------------------------------------------------------
+components.html("""
+<script>
+(function() {
+    const parentDoc = window.parent.document;
+
+    function initScrollReveal() {
+        const revealSelectors = [
+            '.scroll-reveal',
+            '.scroll-reveal-left',
+            '.scroll-reveal-right',
+            '.scroll-reveal-scale'
+        ];
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealSelectors.forEach(sel => {
+            parentDoc.querySelectorAll(sel).forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Also trigger ribbon-draw animation
+        parentDoc.querySelectorAll('.ribbon-svg').forEach(el => {
+            const ribbonObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+            ribbonObserver.observe(el);
+        });
+    }
+
+    // Run after a brief delay to let Streamlit render
+    setTimeout(initScrollReveal, 600);
+    // Re-run periodically in case new elements are rendered (tab changes, etc.)
+    setInterval(initScrollReveal, 2000);
+})();
+</script>
+""", height=0)
+
+# ---------------------------------------------------------
+# Navigation (Animated on load)
 # ---------------------------------------------------------
 st.markdown("""
 <div class="maryl-nav">
-    <div class="nav-brand">
-        <span class="nav-sparkle">✦</span>
-        <span>RETENTION INTELLIGENCE</span>
-    </div>
-    <div class="nav-links">
-        <a href="#work" class="nav-link">Analytical Folios <span>7</span></a>
-        <a href="#story" class="nav-link">The Story</a>
-        <a href="#manifesto" class="nav-link">Manifesto</a>
-        <a href="#contact" class="nav-contact-btn">Contact / Inquire ↗</a>
-    </div>
+<div class="nav-brand">
+<span class="nav-sparkle">✦</span>
+<span>RETENTION INTELLIGENCE</span>
+</div>
+<div class="nav-links">
+<a href="#work" class="nav-link">Analytical Folios <span>7</span></a>
+<a href="#story" class="nav-link">The Story</a>
+<a href="#manifesto" class="nav-link">Manifesto</a>
+<a href="#contact" class="nav-contact-btn">Contact / Inquire ↗</a>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Hero Section with Kinetic Masks (Replicating Maryl's Hero)
+# Hero Section with Staggered Intro Animations
 # ---------------------------------------------------------
 st.markdown("""
 <div class="hero-container" id="top">
-    <div class="hero-eyebrow">
-        <span>✦</span> THOUGHTFUL BY DATA. RETENTION BY DESIGN. A LITTLE MAGIC.
-    </div>
-    <h1 class="hero-title_giant" style="font-size: clamp(38px, 6vw, 70px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: #FFFFFF; margin: 0 auto; max-width: 950px;">
-        Thoughtful by <em>design.</em><br>
-        Predictive by <em>data.</em><br>
-        A little <em>magic.</em>
-    </h1>
-    <p class="hero-sub-p">
-        An empirical investigation into 10,000 European retail banking accounts across France, Germany, and Spain. 
-        Evaluating customer stickiness, product depth, and silent capital flight.
-    </p>
-    
-    <!-- 3D Floating Perspective Banking Artifact (Replicating Maryl's 3D Perspective Card) -->
-    <div class="artifact-3d-wrapper">
-        <div class="artifact-3d-card">
-            <div class="artifact-glow-ring">🏛️</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
-                EUROPEAN CENTRAL BANK BENCHMARK &bull; AUDITED PORTFOLIO
-            </div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 8px 0;">
-                €764.86 Million <em style="color: #B3E6DB; font-style: italic;">Monitored.</em>
-            </div>
-            <p style="font-size: 14px; color: #C9C2E0; line-height: 1.6; margin: 0;">
-                Demonstrating how active transacting velocity and the optimal 2-product anchor protect over <strong>€50.12 Million in deposit capital</strong> from silent flight.
-            </p>
-        </div>
-    </div>
+<div class="hero-eyebrow intro-fade-up intro-d1" style="opacity:0;">
+<span>✦</span> THOUGHTFUL BY DATA. RETENTION BY DESIGN. A LITTLE MAGIC.
+</div>
+<h1 class="hero-title-giant intro-blur-reveal intro-d2" style="opacity:0;">
+Thoughtful by <em>design.</em><br>
+Predictive by <em>data.</em><br>
+A little <em>magic.</em>
+</h1>
+<p class="hero-sub-p intro-fade-up intro-d3" style="opacity:0;">
+An empirical investigation into 10,000 European retail banking accounts across France, Germany, and Spain.
+Evaluating customer stickiness, product depth, and silent capital flight.
+</p>
+<div class="artifact-3d-wrapper intro-scale-in intro-d5" style="opacity:0;">
+<div class="artifact-3d-card">
+<div class="artifact-glow-ring">🏛️</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
+EUROPEAN CENTRAL BANK BENCHMARK &bull; AUDITED PORTFOLIO
+</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 8px 0;">
+€764.86 Million <em style="color: #B3E6DB; font-style: italic;">Monitored.</em>
+</div>
+<p style="font-size: 14px; color: #C9C2E0; line-height: 1.6; margin: 0;">
+Demonstrating how active transacting velocity and the optimal 2-product anchor protect over <strong>€50.12 Million in deposit capital</strong> from silent flight.
+</p>
+</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Story Chapters (Replicating Maryl's HeroStory Section)
+# Story Chapters with Scroll-Triggered Reveals
 # ---------------------------------------------------------
 st.markdown("""
 <div id="story">
-    <div class="chapter-section">
-        <div class="chapter-grid">
-            <div>
-                <div class="chapter-eyebrow">CHAPTER 01 &bull; BEHAVIOR OVER DEMOGRAPHICS</div>
-                <h2 class="chapter-title">Human by<br><em>design.</em></h2>
-            </div>
-            <div class="chapter-text">
-                Traditional banking routinely confuses ledger solvency with customer commitment. 
-                A customer maintaining six figures who never transacts is not a loyal customer—they are 
-                an unengaged depositor quietly awaiting the next yield shift. We model banking through genuine 
-                human engagement.
-            </div>
-        </div>
-    </div>
+<div class="chapter-section scroll-reveal">
+<div class="chapter-grid">
+<div class="scroll-reveal-left sr-delay-1">
+<div class="chapter-eyebrow">CHAPTER 01 &bull; BEHAVIOR OVER DEMOGRAPHICS</div>
+<h2 class="chapter-title">Human by<br><em>design.</em></h2>
+</div>
+<div class="chapter-text scroll-reveal-right sr-delay-2">
+Traditional banking routinely confuses ledger solvency with customer commitment.
+A customer maintaining six figures who never transacts is not a loyal customer—they are
+an unengaged depositor quietly awaiting the next yield shift. We model banking through genuine
+human engagement.
+</div>
+</div>
+</div>
 
-    <div class="chapter-section">
-        <div class="chapter-grid">
-            <div>
-                <div class="chapter-eyebrow">CHAPTER 02 &bull; ECONOMETRIC RIGOR</div>
-                <h2 class="chapter-title">Magic by<br><em>code.</em></h2>
-            </div>
-            <div class="chapter-text">
-                From Pearson's Chi-Square Contingency tests to Mann-Whitney U distributions and Random Forest 
-                permutation rankings: empirical proof that behavioral metrics dominate traditional salary 
-                and credit scores by an order of magnitude.
-            </div>
-        </div>
-    </div>
+<div class="chapter-section scroll-reveal">
+<div class="chapter-grid">
+<div class="scroll-reveal-left sr-delay-1">
+<div class="chapter-eyebrow">CHAPTER 02 &bull; ECONOMETRIC RIGOR</div>
+<h2 class="chapter-title">Precision by<br><em>proof.</em></h2>
+</div>
+<div class="chapter-text scroll-reveal-right sr-delay-2">
+From Pearson's Chi-Square Contingency tests to Mann-Whitney U distributions and Random Forest
+permutation rankings: empirical proof that behavioral metrics dominate traditional salary
+and credit scores by an order of magnitude.
+</div>
+</div>
+</div>
 
-    <div class="chapter-section">
-        <div class="chapter-grid">
-            <div>
-                <div class="chapter-eyebrow">CHAPTER 03 &bull; CAPITAL PRESERVATION</div>
-                <h2 class="chapter-title">More than<br><em>numbers.</em></h2>
-            </div>
-            <div class="chapter-text">
-                Safeguarding over <strong>€50.12 Million</strong> in liquidity reserves and protecting 
-                <strong>€1.25 Million</strong> in recurring annual Net Interest Margin. Aligning retail banking 
-                with Basel III and European Central Bank prudential liquidity standards.
-            </div>
-        </div>
-    </div>
+<div class="chapter-section scroll-reveal">
+<div class="chapter-grid">
+<div class="scroll-reveal-left sr-delay-1">
+<div class="chapter-eyebrow">CHAPTER 03 &bull; CAPITAL PRESERVATION</div>
+<h2 class="chapter-title">More than<br><em>numbers.</em></h2>
+</div>
+<div class="chapter-text scroll-reveal-right sr-delay-2">
+Safeguarding over <strong>€50.12 Million</strong> in liquidity reserves and protecting
+<strong>€1.25 Million</strong> in recurring annual Net Interest Margin. Aligning retail banking
+with Basel III and European Central Bank prudential liquidity standards.
+</div>
+</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Manifesto Section with Rotating Sparkle Star (Exact Maryl Replica)
+# Manifesto with Scroll-Triggered Sparkle & Ribbon Draw
 # ---------------------------------------------------------
 st.markdown("""
-<div class="manifesto-box" id="manifesto">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase; margin-bottom: 12px;">
-        GOOD BANKING MAKES SENSE. GREAT RETENTION UNDERSTANDS BEHAVIOR.
-    </div>
-    <div class="manifesto-title">
-        Equal parts <span>intention,</span> intuition 
-        <svg class="manifesto-star-svg" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
-        </svg> 
-        & a little <span>unexpected.</span>
-    </div>
-    <div class="manifesto-note">
-        From the first deposit sweep to the deepest relationship anchor.<br>
-        We model it. We simulate it. We safeguard it.
-    </div>
-    <svg viewBox="0 0 1000 200" class="ribbon-svg">
-        <path d="M-20 150C180-20 250 220 440 75S600 200 490 155S700-30 1020 130" fill="none" stroke="currentColor" stroke-width="2.5"></path>
-    </svg>
+<div class="manifesto-box scroll-reveal" id="manifesto">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase; margin-bottom: 12px;">
+GOOD BANKING MAKES SENSE. GREAT RETENTION UNDERSTANDS BEHAVIOR.
+</div>
+<div class="manifesto-title">
+Equal parts <span>intention,</span> intuition
+<svg class="manifesto-star-svg" viewBox="0 0 100 100" fill="currentColor">
+<path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
+</svg>
+&amp; a little <span>unexpected.</span>
+</div>
+<div class="manifesto-note">
+From the first deposit sweep to the deepest relationship anchor.<br>
+We model it. We simulate it. We safeguard it.
+</div>
+<svg viewBox="0 0 1000 200" class="ribbon-svg">
+<path d="M-20 150C180-20 250 220 440 75S600 200 490 155S700-30 1020 130" fill="none" stroke="currentColor" stroke-width="2.5"></path>
+</svg>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Case Showcase Preview Cards (Replicating Maryl's Project Cards)
+# Portfolio Showcase Cards with Staggered Scroll Reveals
 # ---------------------------------------------------------
 st.markdown("""
-<div style="margin-bottom: 20px;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
-        PORTFOLIO SHOWCASE
-    </div>
-    <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin-top: 4px;">
-        Core Empirical Discoveries.
-    </div>
+<div class="scroll-reveal" style="margin-bottom: 20px;">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
+PORTFOLIO SHOWCASE
+</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin-top: 4px;">
+Core Empirical Discoveries.
+</div>
 </div>
 
 <div class="showcase-grid">
-    <div class="showcase-card">
-        <div class="showcase-card-num">FOLIO 01</div>
-        <div class="showcase-card-h">The 2-Product Golden Zone</div>
-        <p class="showcase-card-p">
-            Moving from 1 to 2 products plunges churn from <strong>27.71% down to 7.58%</strong> (a 72.6% relative collapse in attrition).
-        </p>
-    </div>
-    <div class="showcase-card">
-        <div class="showcase-card-num">FOLIO 02</div>
-        <div class="showcase-card-h">High-Balance Flight Paradox</div>
-        <p class="showcase-card-p">
-            Customers with &gt;€100k balance control <strong>€312.27 Million</strong> (40.8% of portfolio), yet 49.1% are dormant with a 32.8% churn flight risk.
-        </p>
-    </div>
-    <div class="showcase-card">
-        <div class="showcase-card-num">FOLIO 03</div>
-        <div class="showcase-card-h">The German Banking Anomaly</div>
-        <p class="showcase-card-p">
-            100% of German accounts carry positive balances (€119,730 average), yet experience <strong>32.44% churn</strong>—double France and Spain.
-        </p>
-    </div>
-    <div class="showcase-card">
-        <div class="showcase-card-num">FOLIO 04</div>
-        <div class="showcase-card-h">Relationship Strength Index (RSI)</div>
-        <p class="showcase-card-p">
-            A composite 0–100 behavioral scoring model that proves retained customers score <strong>60.0</strong> vs <strong>42.8</strong> for departing accounts.
-        </p>
-    </div>
+<div class="showcase-card scroll-reveal-scale sr-delay-1">
+<div class="showcase-card-num">FOLIO 01</div>
+<div class="showcase-card-h">The 2-Product Golden Zone</div>
+<p class="showcase-card-p">
+Moving from 1 to 2 products plunges churn from <strong>27.71% down to 7.58%</strong> (a 72.6% relative collapse in attrition).
+</p>
+</div>
+<div class="showcase-card scroll-reveal-scale sr-delay-2">
+<div class="showcase-card-num">FOLIO 02</div>
+<div class="showcase-card-h">High-Balance Flight Paradox</div>
+<p class="showcase-card-p">
+Customers with &gt;€100k balance control <strong>€312.27 Million</strong> (40.8% of portfolio), yet 49.1% are dormant with a 32.8% churn flight risk.
+</p>
+</div>
+<div class="showcase-card scroll-reveal-scale sr-delay-3">
+<div class="showcase-card-num">FOLIO 03</div>
+<div class="showcase-card-h">The German Banking Anomaly</div>
+<p class="showcase-card-p">
+100% of German accounts carry positive balances (€119,730 average), yet experience <strong>32.44% churn</strong>—double France and Spain.
+</p>
+</div>
+<div class="showcase-card scroll-reveal-scale sr-delay-4">
+<div class="showcase-card-num">FOLIO 04</div>
+<div class="showcase-card-h">Relationship Strength Index (RSI)</div>
+<p class="showcase-card-p">
+A composite 0–100 behavioral scoring model that proves retained customers score <strong>60.0</strong> vs <strong>42.8</strong> for departing accounts.
+</p>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Interactive Work Studio & Telemetry Controls
+# Interactive Work Studio Header
 # ---------------------------------------------------------
 st.markdown("""
-<div id="work" style="margin-bottom: 25px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px;">
-        <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
-                ✦ INTERACTIVE WORK STUDIO
-            </div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: #FFFFFF; margin-top: 4px;">
-                Live Analytical Folios.
-            </div>
-        </div>
-        <div style="font-size: 13px; color: #A59DBF;">
-            Toggle below to explore spatial 3D models, simulation engines & lead rosters.
-        </div>
-    </div>
+<div id="work" class="scroll-reveal" style="margin-bottom: 25px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px;">
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #D7C6FF; text-transform: uppercase;">
+✦ INTERACTIVE WORK STUDIO
+</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: #FFFFFF; margin-top: 4px;">
+Live Analytical Folios.
+</div>
+</div>
+<div style="font-size: 13px; color: #A59DBF;">
+Toggle below to explore spatial 3D models, simulation engines &amp; lead rosters.
+</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -771,68 +1015,58 @@ tab_command, tab_3d_hologram, tab_engagement, tab_products, tab_vip_radar, tab_s
 # =========================================================
 with tab_command:
     m1, m2, m3, m4, m5 = st.columns(5)
-    
+
     with m1:
-        st.markdown(f"""
-        <div class="showcase-card">
-            <div class="showcase-card-num">METRIC I</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">PORTFOLIO CHURN</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['overall_churn_rate']*100:.2f}%</div>
-            <span class="pill-rose" style="display:inline-block; background:rgba(251,113,133,0.12); border:1px solid rgba(251,113,133,0.3); color:#FB7185; padding:3px 8px; border-radius:9999px; font-size:11px;">{kpis['churned_customers']:,} exited</span>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">METRIC I</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">PORTFOLIO CHURN</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['overall_churn_rate']*100:.2f}%</div>
+<span class="pill-rose">ERR</span>
+</div>""", unsafe_allow_html=True)
 
     with m2:
-        st.markdown(f"""
-        <div class="showcase-card">
-            <div class="showcase-card-num">METRIC II</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">ENGAGEMENT RATIO</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['err']:.2f}&times;</div>
-            <span class="pill-mint" style="display:inline-block; background:rgba(179,230,219,0.12); border:1px solid rgba(179,230,219,0.3); color:#B3E6DB; padding:3px 8px; border-radius:9999px; font-size:11px;">Active: {kpis['active_churn_rate']*100:.1f}% vs Inact: {kpis['inactive_churn_rate']*100:.1f}%</span>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">METRIC II</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">PRODUCT DEPTH</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['product_depth_index']:.3f}</div>
+<span class="pill-lavender">PDI</span>
+</div>""", unsafe_allow_html=True)
 
     with m3:
-        st.markdown(f"""
-        <div class="showcase-card">
-            <div class="showcase-card-num">METRIC III</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">VIP DISENGAGEMENT</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['hbdr']*100:.2f}%</div>
-            <span class="pill-gold" style="display:inline-block; background:rgba(245,208,97,0.12); border:1px solid rgba(245,208,97,0.3); color:#F5D061; padding:3px 8px; border-radius:9999px; font-size:11px;">{kpis['inactive_high_bal_count']:,} VIPs Dormant</span>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">METRIC III</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">HIGH-BAL DISENGAGEMENT</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['high_balance_disengagement_rate']*100:.1f}%</div>
+<span class="pill-rose">HBDR</span>
+</div>""", unsafe_allow_html=True)
 
     with m4:
-        st.markdown(f"""
-        <div class="showcase-card">
-            <div class="showcase-card-num">METRIC IV</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">CAPITAL AT RISK</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{kpis['at_risk_balance']/1e6:.1f}M</div>
-            <span class="pill-rose" style="display:inline-block; background:rgba(251,113,133,0.12); border:1px solid rgba(251,113,133,0.3); color:#FB7185; padding:3px 8px; border-radius:9999px; font-size:11px;">{kpis['pct_balance_at_risk']:.1f}% of ledger</span>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">METRIC IV</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">CREDIT CARD STICKINESS</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['credit_card_stickiness_score']*100:.1f}%</div>
+<span class="pill-mint">CCSS</span>
+</div>""", unsafe_allow_html=True)
 
     with m5:
-        st.markdown(f"""
-        <div class="showcase-card">
-            <div class="showcase-card-num">METRIC V</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">CARD STICKINESS</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['cc_stickiness_delta']:+.2f}%</div>
-            <span class="pill-lavender" style="display:inline-block; background:rgba(215,198,255,0.12); border:1px solid rgba(215,198,255,0.3); color:#D7C6FF; padding:3px 8px; border-radius:9999px; font-size:11px;">p = 0.492 (Zero direct lift)</span>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">METRIC V</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9D96B8;">RELATIONSHIP STRENGTH</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{kpis['avg_relationship_strength']:.1f}</div>
+<span class="pill-lavender">RSI / 100</span>
+</div>""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Dial & Sunburst Row
-    col_g1, col_g2, col_g3 = st.columns([1, 1, 1.2])
+    # Dial & Sunburst
+    col_g1, col_g2, col_g3 = st.columns(3)
 
     with col_g1:
+        churn_val = kpis['overall_churn_rate'] * 100
         fig_g1 = go.Figure(go.Indicator(
-            mode="gauge+number+delta",
-            value=kpis['overall_churn_rate'] * 100,
-            title={'text': "<b>Portfolio Churn Risk</b><br><span style='font-size:12px;color:#A59DBF'>Regulatory Benchmark < 12.0%</span>", 'font': {'family': 'Playfair Display, serif', 'color': '#FFFFFF'}},
-            delta={'reference': 12.0, 'increasing': {'color': '#FB7185'}, 'decreasing': {'color': '#B3E6DB'}},
+            mode="gauge+number",
+            value=churn_val,
+            title={'text': "<b>Portfolio Churn Rate</b><br><span style='font-size:12px;color:#A59DBF'>Alert Zone > 25%</span>", 'font': {'family': 'Playfair Display, serif', 'color': '#FFFFFF'}},
             gauge={
                 'axis': {'range': [0, 40], 'tickcolor': '#A59DBF'},
                 'bar': {'color': '#FB7185'},
@@ -840,8 +1074,8 @@ with tab_command:
                 'borderwidth': 1,
                 'bordercolor': 'rgba(215, 198, 255, 0.2)',
                 'steps': [
-                    {'range': [0, 12], 'color': 'rgba(179, 230, 219, 0.25)'},
-                    {'range': [12, 25], 'color': 'rgba(245, 208, 97, 0.25)'},
+                    {'range': [0, 15], 'color': 'rgba(179, 230, 219, 0.3)'},
+                    {'range': [15, 25], 'color': 'rgba(245, 208, 97, 0.25)'},
                     {'range': [25, 40], 'color': 'rgba(251, 113, 133, 0.35)'}
                 ],
             }
@@ -1001,14 +1235,12 @@ with tab_3d_hologram:
     )
     st.plotly_chart(fig_3d, width='stretch')
 
-    st.markdown("""
-    <div style="background: rgba(35, 23, 51, 0.7); border: 1px solid rgba(215, 198, 255, 0.2); border-radius: 14px; padding: 16px 22px;">
-        <span style="color: #D7C6FF; font-weight: 700;">✦ Spatial Behavioral Insight:</span> 
-        Observe the distinct cluster of <span style="color: #FB7185; font-weight: 700;">rose churned points</span> concentrated at 
-        <strong>Age 45–60 with balances above €100,000 and 1 or 3+ products</strong>. 
-        This cluster accounts for over sixty percent of total retail capital flight.
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("""<div class="insight-callout">
+<span style="color: #D7C6FF; font-weight: 700;">✦ Spatial Behavioral Insight:</span>
+Observe the distinct cluster of <span style="color: #FB7185; font-weight: 700;">rose churned points</span> concentrated at
+<strong>Age 45–60 with balances above €100,000 and 1 or 3+ products</strong>.
+This cluster accounts for over sixty percent of total retail capital flight.
+</div>""", unsafe_allow_html=True)
 
 # =========================================================
 # TAB 3: ENGAGEMENT DYNAMICS
@@ -1190,29 +1422,23 @@ with tab_products:
 
     b1, b2, b3 = st.columns(3)
     with b1:
-        st.markdown("""
-        <div class="showcase-card">
-            <div class="showcase-card-num">1 PRODUCT VULNERABILITY</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FB7185; margin: 4px 0;">27.71% Churn</div>
-            <p style="font-size: 13px; color: #C9C2E0; margin: 0;">50.8% of customers hold no secondary anchors, resulting in near-zero switching resistance.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown("""<div class="showcase-card">
+<div class="showcase-card-num">1 PRODUCT VULNERABILITY</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FB7185; margin: 4px 0;">27.71% Churn</div>
+<p style="font-size: 13px; color: #C9C2E0; margin: 0;">50.8% of customers hold no secondary anchors, resulting in near-zero switching resistance.</p>
+</div>""", unsafe_allow_html=True)
     with b2:
-        st.markdown("""
-        <div class="showcase-card" style="border-color: rgba(179, 230, 219, 0.4); box-shadow: 0 0 25px rgba(179, 230, 219, 0.12);">
-            <div class="showcase-card-num" style="color: #B3E6DB;">THE 2-PRODUCT GOLDEN ZONE</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #B3E6DB; margin: 4px 0;">7.58% Churn (&minus;72.6%)</div>
-            <p style="font-size: 13px; color: #C9C2E0; margin: 0;">The mathematical optimum: pairing checking with savings or mortgage maximizes loyalty.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown("""<div class="showcase-card" style="border-color: rgba(179, 230, 219, 0.4); box-shadow: 0 0 25px rgba(179, 230, 219, 0.12);">
+<div class="showcase-card-num" style="color: #B3E6DB;">THE 2-PRODUCT GOLDEN ZONE</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #B3E6DB; margin: 4px 0;">7.58% Churn (&minus;72.6%)</div>
+<p style="font-size: 13px; color: #C9C2E0; margin: 0;">The mathematical optimum: pairing checking with savings or mortgage maximizes loyalty.</p>
+</div>""", unsafe_allow_html=True)
     with b3:
-        st.markdown("""
-        <div class="showcase-card" style="border-color: rgba(251, 113, 133, 0.35);">
-            <div class="showcase-card-num" style="color: #FB7185;">MULTI-PRODUCT HOCKEY STICK</div>
-            <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FB7185; margin: 4px 0;">82.7% to 100% Churn</div>
-            <p style="font-size: 13px; color: #C9C2E0; margin: 0;">Forced bundling beyond 2 products triggers customer alienation, fee fatigue, and immediate flight.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown("""<div class="showcase-card" style="border-color: rgba(251, 113, 133, 0.35);">
+<div class="showcase-card-num" style="color: #FB7185;">MULTI-PRODUCT HOCKEY STICK</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FB7185; margin: 4px 0;">82.7% to 100% Churn</div>
+<p style="font-size: 13px; color: #C9C2E0; margin: 0;">Forced bundling beyond 2 products triggers customer alienation, fee fatigue, and immediate flight.</p>
+</div>""", unsafe_allow_html=True)
 
 # =========================================================
 # TAB 5: VIP ACCOUNT RADAR & DOSSIER
@@ -1264,7 +1490,7 @@ with tab_vip_radar:
 
         with r_left:
             radar_categories = ['Credit Score', 'Product Depth', 'Activity', 'Tenure', 'Salary Level']
-            
+
             c_credit = min(cust_record['CreditScore'] / 8.5, 100)
             c_prod = 100 if cust_record['NumOfProducts'] == 2 else (50 if cust_record['NumOfProducts'] == 1 else 15)
             c_act = 100 if cust_record['IsActiveMember'] == 1 else 10
@@ -1300,28 +1526,28 @@ with tab_vip_radar:
             st.plotly_chart(fig_radar, width='stretch')
 
         with r_right:
-            st.markdown(f"""
-            <div class="showcase-card">
-                <div class="showcase-card-num">CUSTOMER PROFILE #{cust_record['CustomerId']}</div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">
-                    {cust_record['Surname']}, {cust_record['Geography']}
-                </div>
-                <div style="margin: 8px 0;">
-                    <span class="pill-rose">{cust_record['RetentionTier']}</span>
-                    <span class="pill-lavender">RSI: {cust_record['RelationshipStrengthIndex']} / 100</span>
-                </div>
-                <div style="font-size: 13px; color: #C9C2E0; line-height: 1.6; margin-top: 10px;">
-                    &bull; <strong>Ledger Balance:</strong> €{cust_record['Balance']:,.2f}<br>
-                    &bull; <strong>Estimated Salary:</strong> €{cust_record['EstimatedSalary']:,.2f}<br>
-                    &bull; <strong>Bank Products:</strong> {cust_record['NumOfProducts']} product(s)<br>
-                    &bull; <strong>Activity Status:</strong> {'Active Member' if cust_record['IsActiveMember']==1 else 'Inactive / Dormant'}<br>
-                    &bull; <strong>Credit Card Held:</strong> {'Yes' if cust_record['HasCrCard']==1 else 'No'}
-                </div>
-                <div style="margin-top: 14px; font-size: 12px; color: #FB7185; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3); padding: 10px; border-radius: 8px;">
-                    ⚠️ <strong>Recommended Action:</strong> Proactively reach out with personalized wealth advisory. Offer 2-product fixed term or automated savings sweeps to avoid capital drain.
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            cust_activity = 'Active Member' if cust_record['IsActiveMember'] == 1 else 'Inactive / Dormant'
+            cust_card = 'Yes' if cust_record['HasCrCard'] == 1 else 'No'
+            st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">CUSTOMER PROFILE #{cust_record['CustomerId']}</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">
+{cust_record['Surname']}, {cust_record['Geography']}
+</div>
+<div style="margin: 8px 0;">
+<span class="pill-rose">{cust_record['RetentionTier']}</span>
+<span class="pill-lavender">RSI: {cust_record['RelationshipStrengthIndex']} / 100</span>
+</div>
+<div style="font-size: 13px; color: #C9C2E0; line-height: 1.6; margin-top: 10px;">
+&bull; <strong>Ledger Balance:</strong> €{cust_record['Balance']:,.2f}<br>
+&bull; <strong>Estimated Salary:</strong> €{cust_record['EstimatedSalary']:,.2f}<br>
+&bull; <strong>Bank Products:</strong> {cust_record['NumOfProducts']} product(s)<br>
+&bull; <strong>Activity Status:</strong> {cust_activity}<br>
+&bull; <strong>Credit Card Held:</strong> {cust_card}
+</div>
+<div style="margin-top: 14px; font-size: 12px; color: #FB7185; background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3); padding: 10px; border-radius: 8px;">
+⚠️ <strong>Recommended Action:</strong> Proactively reach out with personalized wealth advisory. Offer 2-product fixed term or automated savings sweeps to avoid capital drain.
+</div>
+</div>""", unsafe_allow_html=True)
 
     # Lead Table
     st.markdown("#### Prioritized Account Roster")
@@ -1393,44 +1619,36 @@ with tab_simulation:
 
     with col_sim_r:
         st.markdown("### 🎯 Projected Financial Outcomes")
-        
+
         o1, o2 = st.columns(2)
         with o1:
-            st.markdown(f"""
-            <div class="showcase-card">
-                <div class="showcase-card-num">PROJECTED OUTCOME</div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{sim_res['simulated_churn_rate']*100:.2f}%</div>
-                <span class="pill-mint">Down from {sim_res['baseline_churn_rate']*100:.2f}% (&minus;{sim_res['churn_rate_reduction_bps']:.0f} bps)</span>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">PROJECTED OUTCOME</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{sim_res['simulated_churn_rate']*100:.2f}%</div>
+<span class="pill-mint">Down from {sim_res['baseline_churn_rate']*100:.2f}% (&minus;{sim_res['churn_rate_reduction_bps']:.0f} bps)</span>
+</div>""", unsafe_allow_html=True)
         with o2:
-            st.markdown(f"""
-            <div class="showcase-card">
-                <div class="showcase-card-num">CLIENT PROTECTION</div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{sim_res['total_customers_saved']:,}</div>
-                <span class="pill-lavender">Accounts Prevented from Exiting</span>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">CLIENT PROTECTION</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">{sim_res['total_customers_saved']:,}</div>
+<span class="pill-lavender">Accounts Prevented from Exiting</span>
+</div>""", unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
 
         o3, o4 = st.columns(2)
         with o3:
-            st.markdown(f"""
-            <div class="showcase-card">
-                <div class="showcase-card-num">LIQUIDITY PRESERVED</div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{sim_res['total_capital_preserved']/1e6:.2f}M</div>
-                <span class="pill-mint">Protected from Liquidity Run-Off</span>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">LIQUIDITY PRESERVED</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{sim_res['total_capital_preserved']/1e6:.2f}M</div>
+<span class="pill-mint">Protected from Liquidity Run-Off</span>
+</div>""", unsafe_allow_html=True)
         with o4:
-            st.markdown(f"""
-            <div class="showcase-card">
-                <div class="showcase-card-num">NET INTEREST REVENUE</div>
-                <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{sim_res['annual_revenue_protected']/1e6:.2f}M</div>
-                <span class="pill-mint">At {sim_nim:.2f}% Annual Spread</span>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f"""<div class="showcase-card">
+<div class="showcase-card-num">NET INTEREST REVENUE</div>
+<div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; color: #FFFFFF; margin: 4px 0;">€{sim_res['annual_revenue_protected']/1e6:.2f}M</div>
+<span class="pill-mint">At {sim_nim:.2f}% Annual Spread</span>
+</div>""", unsafe_allow_html=True)
 
     st.markdown("---")
 
@@ -1510,37 +1728,34 @@ with tab_methodology:
         st.plotly_chart(fig_or, width='stretch')
 
 # ---------------------------------------------------------
-# Exact Maryl Gonzalez Contact Section (#contact)
+# Contact Section with Scroll Reveal
 # ---------------------------------------------------------
 st.markdown("""
-<div class="contact-section" id="contact">
-    <div class="contact-top">
-        <p class="contact-eyebrow">HAVE SOMETHING IN MIND?</p>
-        <span class="contact-spark-text">GOOD THINGS START WITH A CONVERSATION.</span>
-    </div>
-    
-    <a href="mailto:aryan.analytics@example.com" class="contact-title-big">
-        <span>Let's make customer retention <em>magic.</em></span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: #D7C6FF;">
-            <path d="M7 7h10v10"></path>
-            <path d="M7 17 17 7"></path>
-        </svg>
-    </a>
-    
-    <div style="margin: 20px 0;">
-        <svg class="manifesto-star-svg" viewBox="0 0 100 100" fill="currentColor" style="width: 44px; height: 44px;">
-            <path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
-        </svg>
-    </div>
-
-    <div class="contact-bottom">
-        <div>
-            <a href="mailto:aryan.analytics@example.com" class="contact-email-link">aryan.analytics@example.com ↗</a>
-        </div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A59DBF;">
-            Unified Mentor Analytics Fellow &bull; European Central Bank Case Framework
-        </div>
-    </div>
+<div class="contact-section scroll-reveal" id="contact">
+<div class="contact-top">
+<p class="contact-eyebrow">HAVE SOMETHING IN MIND?</p>
+<span class="contact-spark-text">GOOD THINGS START WITH A CONVERSATION.</span>
+</div>
+<a href="mailto:aryan.analytics@example.com" class="contact-title-big">
+<span>Let's make customer retention <em>magic.</em></span>
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="color: #D7C6FF;">
+<path d="M7 7h10v10"></path>
+<path d="M7 17 17 7"></path>
+</svg>
+</a>
+<div style="margin: 20px 0;">
+<svg class="manifesto-star-svg" viewBox="0 0 100 100" fill="currentColor" style="width: 44px; height: 44px;">
+<path d="M50 0C56 32 68 44 100 50C68 56 56 68 50 100C44 68 32 56 0 50C32 44 44 32 50 0Z"></path>
+</svg>
+</div>
+<div class="contact-bottom">
+<div>
+<a href="mailto:aryan.analytics@example.com" class="contact-email-link">aryan.analytics@example.com ↗</a>
+</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A59DBF;">
+Unified Mentor Analytics Fellow &bull; European Central Bank Case Framework
+</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -1550,6 +1765,6 @@ st.markdown("""
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #A59DBF; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 12px 0;">
-    ✦ DESIGN, TECHNOLOGY & A LITTLE MAGIC &bull; DEVELOPED BY ARYAN &bull; UNIFIED MENTOR BANKING STUDY
+✦ DESIGN, TECHNOLOGY &amp; A LITTLE MAGIC &bull; DEVELOPED BY ARYAN &bull; UNIFIED MENTOR BANKING STUDY
 </div>
 """, unsafe_allow_html=True)
