@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Experience & Technical Defence Slides · Aryan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #120E1C;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(102, 88, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(215, 198, 255, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(179, 230, 219, 0.12) 0%, transparent 50%);
+            color: #F8F6F2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Presentation Container */
+        .deck-wrapper {
+            width: 90vw;
+            max-width: 1200px;
+            height: 82vh;
+            max-height: 720px;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(35, 28, 52, 0.9) 0%, rgba(20, 16, 30, 0.95) 100%);
+            border: 1px solid rgba(215, 198, 255, 0.22);
+            border-radius: 28px;
+            padding: 48px 56px;
+            box-shadow: 0 30px 80px rgba(10, 6, 18, 0.85);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transform: translateX(60px) scale(0.96);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* Slide Typography */
+        .slide-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #D7C6FF;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .slide-title em {
+            font-style: italic;
+            background: linear-gradient(135deg, #D7C6FF 0%, #B3E6DB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 2-Column Grid */
+        .slide-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: auto 0;
+        }
+
+        .card-tile {
+            background: rgba(45, 36, 65, 0.6);
+            border: 1px solid rgba(215, 198, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+        .card-tile:hover {
+            border-color: rgba(215, 198, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .card-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #F5D061;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .card-head {
+            font-size: 17px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: #C9C2E0;
+            line-height: 1.5;
+        }
+
+        /* Row Layout */
+        .feedback-row {
+            background: rgba(45, 36, 65, 0.5);
+            border: 1px solid rgba(215, 198, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .feedback-h {
+            font-size: 17px;
+            font-weight: 700;
+            color: #B3E6DB;
+            margin-bottom: 6px;
+        }
+
+        .feedback-p {
+            font-size: 14px;
+            color: #C9C2E0;
+            line-height: 1.6;
+        }
+
+        /* Slide Footer Meta */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(215, 198, 255, 0.12);
+            padding-top: 16px;
+            font-size: 12px;
+            color: #A59DBF;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Navigation Floating Controls */
+        .nav-dock {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(23, 19, 35, 0.85);
+            border: 1px solid rgba(215, 198, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 9999px;
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-btn {
+            background: rgba(215, 198, 255, 0.12);
+            border: 1px solid rgba(215, 198, 255, 0.25);
+            color: #FFFFFF;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .nav-btn:hover {
+            background: #6658FF;
+            border-color: #6658FF;
+            transform: scale(1.08);
+        }
+
+        .nav-indicator {
+            font-size: 13px;
+            font-weight: 600;
+            color: #D7C6FF;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-hint {
+            font-size: 11px;
+            color: #A59DBF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="deck-wrapper">
+
+        <!-- SLIDE 1: Title -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-eyebrow">
+                <span>✦</span> UNIFIED MENTOR INTERNSHIP DEFENCE &bull; CAPSTONE 2026
+            </div>
+            <div style="margin: auto 0;">
+                <h1 class="slide-title" style="font-size: 46px; margin-bottom: 16px;">
+                    Internship Experience &amp;<br>
+                    <em>Program Feedback</em>
+                </h1>
+                <p style="font-size: 18px; color: #D7C6FF; line-height: 1.6; max-width: 800px; margin-bottom: 24px;">
+                    Customer Engagement &amp; Product Utilization Analytics for Retention Strategy<br>
+                    <span style="font-size: 14px; color: #B3E6DB;">European Central Bank Retail Banking Case Framework</span>
+                </p>
+                <div style="background: rgba(102, 88, 255, 0.15); border: 1px solid rgba(102, 88, 255, 0.35); padding: 16px 24px; border-radius: 12px; display: inline-block;">
+                    <div style="font-size: 15px; font-weight: 700; color: #FFFFFF;">Presenter: Aryan</div>
+                    <div style="font-size: 13px; color: #C9C2E0;">Quantitative Data Analytics &amp; Retention Strategy Intern &bull; Unified Mentor</div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>PRESS ➔ OR SPACE TO NAVIGATE</span>
+                <span>SLIDE 01 / 04</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Key Learnings -->
+        <div class="slide" id="slide-2">
+            <div>
+                <div class="slide-eyebrow">✦ TECHNICAL PROFICIENCIES &bull; DOMAIN EXPERTISE</div>
+                <h2 class="slide-title">Key Learnings &amp; <em>Technical Growth</em></h2>
+            </div>
+            <div class="slide-grid-2x2">
+                <div class="card-tile">
+                    <div class="card-num">01 &bull; BANKING METRICS</div>
+                    <div class="card-head" style="color: #D7C6FF;">Domain-Specific KPIs</div>
+                    <div class="card-desc">Formulated institutional metrics including Engagement Retention Ratio (ERR = 1.17x), High-Balance Disengagement Rate (HBDR = 49.1%), and composite RSI (0–100).</div>
+                </div>
+                <div class="card-tile">
+                    <div class="card-num">02 &bull; NON-LINEAR DYNAMICS</div>
+                    <div class="card-head" style="color: #B3E6DB;">The 2-Product Golden Zone</div>
+                    <div class="card-desc">Disproved traditional bundling assumptions: migrating 1 to 2 products triggers a 72.6% drop in churn (from 27.7% down to 7.58%), while 3+ products causes churn spikes up to 100%.</div>
+                </div>
+                <div class="card-tile">
+                    <div class="card-num">03 &bull; ECONOMETRIC RIGOR</div>
+                    <div class="card-head" style="color: #F5D061;">Statistical Hypothesis Testing</div>
+                    <div class="card-desc">Validated findings with Pearson's Chi-Square (p &lt; 10⁻¹⁰⁰), Mann-Whitney U, and Random Forest Gini ranking proving behavior dominates salary by an order of magnitude.</div>
+                </div>
+                <div class="card-tile">
+                    <div class="card-num">04 &bull; STRATEGY ENGINE</div>
+                    <div class="card-head" style="color: #FB7185;">Interactive What-If Simulator</div>
+                    <div class="card-desc">Constructed interactive Streamlit and Plotly 3D spatial models demonstrating how three targeted behavioral interventions preserve €50.12M in capital reserves.</div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>UNIFIED MENTOR DATA SCIENCE CAPSTONE</span>
+                <span>SLIDE 02 / 04</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Feedback & Mentorship -->
+        <div class="slide" id="slide-3">
+            <div>
+                <div class="slide-eyebrow">✦ CURRICULUM &bull; INSTITUTIONAL IMPACT</div>
+                <h2 class="slide-title">Program Reflection &amp; <em>Feedback</em></h2>
+            </div>
+            <div style="margin: auto 0;">
+                <div class="feedback-row">
+                    <div class="feedback-h" style="color: #B3E6DB;">✦ Institutional Problem Solving Over Academic Toys</div>
+                    <div class="feedback-p">Unified Mentor guided us to look beyond sterile kaggle-like accuracy scores to understand real-world business economics, Basel III liquidity regulations, and deposit run-off dynamics.</div>
+                </div>
+                <div class="feedback-row">
+                    <div class="feedback-h" style="color: #D7C6FF;">✦ Complete Full-Cycle Engineering Autonomy</div>
+                    <div class="feedback-p">The project structure demanded ownership across the entire pipeline: raw data ETL, feature engineering, statistical inference, interactive web UI deployment, and executive memorandums.</div>
+                </div>
+                <div class="feedback-row">
+                    <div class="feedback-h" style="color: #F5D061;">✦ Constructive Recommendation for Future Cohorts</div>
+                    <div class="feedback-p">Incorporate live peer-review sessions or mock boardroom presentations where interns defend their mathematical choices and financial estimates in real time.</div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>UNIFIED MENTOR DATA SCIENCE CAPSTONE</span>
+                <span>SLIDE 03 / 04</span>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Gratitude & Conclusion -->
+        <div class="slide" id="slide-4">
+            <div class="slide-eyebrow">✦ CONCLUSION &bull; PROFESSIONAL TRAJECTORY</div>
+            <div style="margin: auto 0; text-align: center;">
+                <div style="font-size: 40px; margin-bottom: 12px;">🏛️ ✦ 📈</div>
+                <h2 class="slide-title" style="font-size: 44px; margin-bottom: 16px;">
+                    A Transformative <em>Journey.</em>
+                </h2>
+                <p style="font-size: 16px; color: #C9C2E0; max-width: 750px; margin: 0 auto 28px auto; line-height: 1.7;">
+                    This internship has solidified my commitment to quantitative financial analytics, risk modeling, and fintech engineering.<br><br>
+                    Sincere gratitude to the <strong>Unified Mentor</strong> leadership, program coordinators, and mentors for providing this platform to build institutional-grade work.
+                </p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B3E6DB;">
+                    Aryan &bull; github.com/Aryansp04/RETENTION-INTELLIGENCE
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>THANK YOU FOR WATCHING</span>
+                <span>SLIDE 04 / 04</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-dock">
+        <button class="nav-btn" onclick="prevSlide()">❮</button>
+        <span class="nav-indicator" id="slideNum">01 / 04</span>
+        <button class="nav-btn" onclick="nextSlide()">❯</button>
+        <span class="nav-hint">Use Keyboard ◀ ▶ or Space</span>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 4;
+
+        function showSlide(index) {
+            document.querySelectorAll('.slide').forEach((s, i) => {
+                s.classList.remove('active');
+                if (i + 1 === index) s.classList.add('active');
+            });
+            document.getElementById('slideNum').textContent = `0${index} / 0${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
